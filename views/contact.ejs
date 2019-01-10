@@ -1,0 +1,81 @@
+<%- include("../partials/head.ejs",
+	{
+		pageTitle: "Contact Us",
+		pageContent: "Contact Glasgow Goalball and come to practice with us."
+	});
+%>
+
+
+
+
+<body>
+
+<% include ../partials/svg.ejs %>
+
+<%- include("../partials/header.ejs",
+	{
+		pageTitle: 'Contact Us',
+		currentMenu: "Contact"
+	});
+%>
+
+
+
+
+<!--***************************************** MAIN CONTENT *********************************************-->
+
+  <main id="main" class="ls-main-container">
+
+    <section class="ls-page-section">
+      <h2 class="visually-hidden">Contact Form</h2>
+      <form id="contact-form" action="/email" method="post">
+				<%if (messageSent) { %>
+					<p class="bold-font">Thank you! Your message has been sent.</p>
+				<% } else if (error) { %>
+					<p class="bold-font">There was an error sending the message, plase try again later or send us an email to <a href="mailto://glasgowgoalball@gmail.com">glasgowgoalball@gmail.com</a></p>
+				<% } else { %>
+        	<p>If you want to be in touch, you can either send us an email at <a href="mailto://glasgowgoalball@gmail.com">glasgowgoalball@gmail.com</a> or fill the form below.</p>
+				<% } %>
+				<br>
+        <p class="form-component">
+          <label for="name" class="form-label">Name (required)</label>
+          <input class="form-input" type="text" required aria-required="true" name="name" id="name" placeholder="enter your name" >
+        </p>
+        <p class="form-component">
+          <label for="email" class="form-label">email address (required)</label>
+          <input class="form-input" type ="select" required aria-required="true" name="email" id="email" placeholder="enter your email">
+        </p>
+        <p class="form-component">
+          <label for="phone" class="form-label">Phone number</label>
+          <input class="form-input" type ="tel" name="phone" id="phone" placeholder="enter your phone">
+        </p>
+        <p class="form-component">
+          <label for="condition" class="form-label">Level of vision:</label>
+          <select class="form-input form-select" name="condition" id="condition">
+            <option class="form-option" value="sighted">Sighted</option>
+            <option class="form-option" value="mildly visually impaired">Visually impaired</option>
+            <option class="form-option" value="severely visually impaired">Severely visually impaired</option>
+          </select>
+        </p>
+        <p class="form-component">
+          <label for="text" class="form-label">Your message</label>
+          <textarea class="form-input textarea" name="text" id="text" cols="50" rows="10" aria-required="true"></textarea>
+        </p>
+        <button class="button" type="submit" value="submit">Submit</button>
+      </form>
+    </section>
+
+<!--***************************************** END OF MAIN CONTENT *********************************************-->
+
+		<%include ../partials/sidebar.ejs %>
+
+  </main>
+
+	<%- include("../partials/footer.ejs",
+		{
+			currentMenu: "Contact"
+		});
+	%>
+
+</body>
+</html>

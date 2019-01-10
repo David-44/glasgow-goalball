@@ -1,0 +1,31 @@
+<% let menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]]; %>
+<h1 class="page-title"><%- pageTitle %></h1>
+
+<header class="ls-header black-back" aria-label="site header">
+  <a href="#main" class="visually-hidden">Skip to main content</a>
+  <img class="ls-banner-picture" src="img/banner.jpg"  alt="Glasgow Goalball Team">
+  <nav aria-labelledby="menu" class="ls-nav" id="nav">
+    <h2 id="menu" class="visually-hidden">Main Menu</h2>
+    <a class="banner-link" href="index.html">
+      <svg role="img link" aria-labelledby="goalball-logo" class="banner-logo" viewBox="0 0 1792 512">
+        <title id="goalball-logo">Glasgow Goalball logo</title>
+        <use xlink:href="#main-logo"></use>
+      </svg>
+    </a>
+    <button aria-controls="nav-menus" aria-live="assertive" id="hamburger" class="hamburger">
+      <svg aria-hidden="true" class="hamburger-icon" viewBox="0 0 53 53"><use xlink:href="#hamburger-icon"></use></svg>
+      <span class="hamburger-text">Menu</span>
+    </button>
+    <ul id="nav-menus" class="nav-menus is-hidden">
+
+      <% menus.forEach( menu => { %>
+        <% if (menu[0] == currentMenu) { %>
+          <li class="nav-menus-item"><span class="visually-hidden">Current: </span><span class="nav-menus-text"><%= currentMenu %></span></li>
+        <% } else { %>
+          <li class="nav-menus-item"><a href="<%= menu[1] %>"><%= menu[0] %></a></li>
+        <% } %>
+      <% }); %>
+
+    </ul>
+  </nav>
+</header>

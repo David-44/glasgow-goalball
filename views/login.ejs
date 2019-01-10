@@ -1,0 +1,43 @@
+<%- include("../partials/head.ejs",
+	{
+		pageTitle: "Login Window",
+		pageContent: "Login window for the admin page of Glasgow Goalball"
+	});
+%>
+
+
+<% include ../partials/svg.ejs %>
+
+<%- include("../partials/header.ejs",
+	{
+		pageTitle: 'Please Login',
+		currentMenu: "Login"
+	});
+%>
+
+<main id="main" class="ls-main-container">
+  <section class="ls-page-section">
+    <h2 class="visually-hidden">Contact Form</h2>
+
+		<%- checkCredentials(wrongCredentials) %>
+
+		<form id="admin-form" action="/admin" method="post">
+      <p class="form-component">
+        <label for="username" class="form-label">Username: </label>
+        <input class="form-input" type="text" required aria-required="true" name="username" id="username" placeholder="username">
+      </p>
+      <p>
+        <label for="password" class="form-label">Password: </label>
+        <input class="form-input" type="password" required aria-required="true" name="password" id="password">
+      </p>
+      <button class="button" type="submit" value="submit">Login</button>
+    </form>
+  </section>
+</main>
+
+
+<%- include("../partials/footer.ejs",
+	{
+		currentMenu: "Login"
+	});
+%>

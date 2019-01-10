@@ -1,0 +1,88 @@
+
+
+<%- include("../partials/head.ejs",
+	{
+		pageTitle: "Admin Page",
+		pageContent: "Goalball Aministrations page."
+	});
+%>
+
+
+
+<body>
+
+<% include ../partials/svg.ejs %>
+
+<h1 class="page-title">Admin Page</h1>
+
+<header class="ls-header black-back" aria-label="site header">
+  <a href="#main" class="visually-hidden">Skip to main content</a>
+  <img class="ls-banner-picture" src="img/banner.jpg"  alt="Glasgow Goalball Team">
+  <nav aria-labelledby="menu" class="ls-nav" id="nav">
+    <h2 id="menu" class="visually-hidden">Main Menu</h2>
+    <a class="banner-link" href="index.html">
+      <svg role="img link" aria-labelledby="goalball-logo" class="banner-logo" viewBox="0 0 1792 512">
+        <title id="goalball-logo">Glasgow Goalball logo</title>
+        <use xlink:href="#main-logo"></use>
+      </svg>
+    </a>
+    <button aria-controls="nav-menus" aria-live="assertive" id="hamburger" class="hamburger">
+      <svg aria-hidden="true" class="hamburger-icon" viewBox="0 0 53 53"><use xlink:href="#hamburger-icon"></use></svg>
+      <span class="hamburger-text">Menu</span>
+    </button>
+    <ul id="nav-menus" class="nav-menus is-hidden">
+      <li class="nav-menus-item"><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+
+<main id="main" class="ls-main-container">
+
+  <section class="ls-page-section">
+    <h2 class="section-title">Blog Post Entry</h2>
+    <form id="blog-form" action="/blogcreate" method="post" enctype="multipart/form-data">
+      <br>
+      <p class="form-component">
+        <label for="title" class="form-label">Title (required)</label>
+        <input class="form-input" type="text" required aria-required="true" name="title" id="title" placeholder="blog title" >
+      </p>
+      <p class="form-component">
+        <label for="text" class="form-label">Article (required)</label>
+        <textarea class="form-input textarea" name="text" id="text" cols="50" rows="10" aria-required="true"></textarea>
+      </p>
+			<br>
+			<p class= "form-component">
+				<label for="image" class="form-label">Upload a Picture(optional)</label>
+				<input id="image" name="image" aria-required="false" type="file">
+			</p>
+      <button class="button button-admin" type="submit" value="submit">Submit</button>
+			<button class="button sec-button button-admin" id="preview" type="button" value="preview">Preview</button>
+    </form>
+  </section>
+
+	<section class="ls-page-section">
+		<h2 class="section-title">Blog Post Preview</h2>
+		<article id="blog-preview">No entry to preview yet</article>
+	</section>
+
+	<section class="ls-page-section">
+		<h2 class="section-title">Current Blogs</h2>
+		<%- articles %>
+	</section>
+
+
+
+
+</main>
+
+<%- include("../partials/footer.ejs",
+	{
+		currentMenu: "Login"
+	});
+%>
+
+</body>
+</html>

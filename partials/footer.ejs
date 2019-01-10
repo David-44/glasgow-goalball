@@ -1,0 +1,61 @@
+<% let menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]]; %>
+
+<footer class="footer black-back" aria-labelledby="footer-info">
+  <h2 id="footer-info" class="visually-hidden">Additional Information</h2>
+
+  <section class="footer-section contact-details" aria-labelledby="social-links">
+    <h3 id="social-links" class="visually-hidden">Social links</h3>
+    <div class="contact-media footer-section-item">
+      <svg aria-hidden="true" class="footer-icon mail-icon" viewBox="0 0 31.012 31.012">
+        <use xlink:href="#mail-icon"></use>
+      </svg>
+      <p class="footer-social-text">email: <a href="mailto://glasgowgoalball@gmail.com<">glasgowgoalball@gmail.com</a></p>
+    </div>
+    <div class="contact-media footer-section-item">
+      <svg aria-hidden="true" class="footer-icon" viewBox="0 0 578.106 578.106">
+        <use xlink:href="#phone-icon"></use>
+      </svg>
+      <p class="footer-social-text">Phone: <a href="tel:00000000000">+4400000000000</a></p>
+    </div>
+    <div class="contact-media footer-section-item">
+      <svg aria-hidden="true" class="footer-icon" viewBox="0 0 408.788 408.788">
+        <use xlink:href="#facebook-icon"></use>
+      </svg>
+      <p class="footer-social-text">Be a friend <a href="https://en-gb.facebook.com/GlasgowGoalball/">facebook</a></p>
+    </div>
+    <div class="contact-media footer-section-item">
+      <svg aria-hidden="true" class="footer-icon" viewBox="0 0 112.197 112.197">
+        <use xlink:href="#twitter-icon"></use>
+      </svg>
+      <p class="footer-social-text">Follow us <a href="https://twitter.com/glasgowgoalball">Twitter</a></p>
+    </div>
+  </section>
+
+  <nav class="visually-hidden" aria-labelledby="footer-menu">
+    <h3 id="footer-menu">Main Menu</h3>
+    <ul>
+      <% menus.forEach( menu => { %>
+        <% if (menu[0] == currentMenu) { %>
+          <li class="nav-menus-item">Current: <span class="nav-menus-text"><%= currentMenu %></span></li>
+        <% } else { %>
+          <li class="nav-menus-item"><a href="<%= menu[1] %>"><%= menu[0] %></a></li>
+        <% } %>
+      <% }); %>
+    </ul>
+  </nav>
+
+  <div class="footer-section misc-info" aria-labelledby="misc-info">
+    <h3 id="misc-info" class="visually-hidden">Miscellaneous Information</h3>
+    <p class="footer-section-item">Consult <a href="http://www.goalballuk.com/the-sport/rules-and-regs/">rules and regulations</a></p>
+    <p class="footer-section-item">Website by <a href="http://morisset-web.co.uk">Morisset Web Services</a></p>
+    <p class="footer-section-item">Icons by Freepik from <a href="http://www.flaticon.com/">flaticon</a></p>
+    <p class="footer-section-item">&copy; Glasgow Goalball <span id="year"></span></p>
+  </div>
+</footer>
+
+
+
+
+
+<script src="script/index.js"></script>
+<script src="http://platform.twitter.com/widgets.js" charset="utf-8"></script>

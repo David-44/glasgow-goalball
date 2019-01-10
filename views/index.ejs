@@ -1,0 +1,76 @@
+<%- include("../partials/head.ejs",
+	{
+		pageTitle: "Home",
+		pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments."
+	});
+%>
+
+
+
+
+<body>
+
+
+<% include ../partials/svg.ejs %>
+
+<%- include("../partials/header.ejs",
+	{
+		pageTitle: 'Welcome <span class="visually-hidden-small">to Glasgow Goalball</span></h1>',
+		currentMenu: "Home"
+	});
+%>
+
+
+
+
+<!--***************************************** MAIN CONTENT *********************************************-->
+
+	<main id="main" class="ls-main-container">
+
+
+    <section class="ls-page-section" aria-labelledby="who">
+      <h2 class="section-title" id="who">Who we are</h2>
+      <p>Glasgow Goalball has players that are visually impaired and sighted that support each other and are able to play on an equal playing field with the use of eye shades. We have players playing at novice, intermediate,  elite and Great Britain level. We all take responsibility for the running of the club, attending competitions and promoting Goalball.  When we compete in competitions we travel together as a team and support each other to get the best out of everyone.
+      </p>
+      <p>We love welcoming new players, having a laugh and arranging social events. This allows us to share experiences and learn from each other to help us live independently.
+      </p>
+      <p>At Glasgow Goalball our doors are always open for people to come and try, its a great sport as it can be played on the first session with no skill but these skills can be progressed making the game very tactful and as fast and furious as you like. All equipment is provided for starting off with but if you enjoy it and want to get competitive then its best to get your own padding for comfort.
+      </p>
+      <p>We offer a meet and greet service at Glasgow central so get in touch and come and have a go! Players typically meet up a central station before boarding the train to Crookston and Rosshall Academy where the club is based.
+      </p>
+      <h3>Glasgow Goalball Tournament History</h3>
+      <p>Over the past 3 seasons Glasgow Goalball has competed in a number of tournaments and have always had a friendly welcome. These tournaments have been held in Scarbourgh, York, Newcastle and Sheffield.  These have been attended by a number of members and all enjoyed the experiences of playing against other teams from across England.
+      </p>
+      <!-- <img src="img/group.jpg" alt="Group picture of Glasgow Goalball members"> -->
+    </section>
+
+
+
+    <section class="ls-page-section" aria-labelledby="transforming-title">
+      <h2 class="section-title" id="transforming-title">Transforming Lives</h2>
+      <p>Introductory video to Goalball, made by Goalball UK</p>
+      <iframe class="external-frame transforming" title="The video Transforming Lives, made by Goalball UK" id="transforming-lives" src="https://player.vimeo.com/video/90205223" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+    </section>
+
+
+
+    <section class="ls-page-section" aria-labelledby="news">
+			<h2 class="section-title" id="news">News</h2>
+      <%- articles %>
+    </section>
+
+<!--***************************************** END OF MAIN CONTENT *********************************************-->
+
+		<%include ../partials/sidebar.ejs %>
+
+	</main>
+
+	<%- include("../partials/footer.ejs",
+		{
+			currentMenu: "Home"
+		});
+	%>
+
+</body>
+
+</html>

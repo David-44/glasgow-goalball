@@ -1,0 +1,75 @@
+<%- include("../partials/head.ejs",
+	{
+		pageTitle: "What is Goalball",
+		pageContent: "Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980."
+	});
+%>
+
+<body>
+
+
+<% include ../partials/svg.ejs %>
+
+<%- include("../partials/header.ejs",
+	{
+		pageTitle: '<span class="visually-hidden-small">About </span>Goalball',
+		currentMenu: "Goalball"
+	});
+%>
+
+
+
+
+<!--***************************************** MAIN CONTENT *********************************************-->
+
+  <main id="main" class="ls-main-container">
+
+    <section class="ls-page-section" aria-labelledby="what">
+      <h2 class="section-title" id="what">What is Goalball?</h2>
+      <p>Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980. Goalball is an indoor team sport with 3 players on court at one time. A goalball match has two halves of 12 minutes. These players wear eyeshades therefore rely on the bell in the ball to defend. To enable the players to orientate themselves and attack the court is marked out with string and tape and the ball is thrown in the hope to score a goal on the other side.
+      </p>
+      <p>It’s a quick paced team sport. All players wear eyeshades and orientate themselves using touch lines to feel where they are on a 9m by 18m court, and from sound from bells within the goalball and from other players. There are three players in a team and they coordinate defence and attacks by rolling the ball between each other and at the opposing team hopefully into the opposing team’s net. Each game lasts twelve minutes.
+      </p>
+    </section>
+
+
+
+    <section class="ls-page-section" aria-labelledby="goalball-pictures">
+      <a href="#tournaments-sect" class="visually-hidden">Skip to tournaments</a>
+      <h2 class="section-title" id="goalball-pictures">Players in action</h2>
+			<figure class="image-group" role="group">
+				<img class="image-thumb" src="img/defense2.jpg" alt="Goalbal players jumping to catch a ball">
+				<figcaption class="image-caption">Goalbal players jumping to catch a ball</figcaption>
+			</figure>
+      <figure class="image-group" role="group">
+        <img class="image-thumb" src="img/block-new.jpg" alt="Defender in the heat of action">
+        <figcaption class="image-caption">Defender in the heat of action</figcaption>
+      </figure>
+      <figure class="image-group" role="group">
+        <img class="image-thumb" src="img/throw-andrea.jpg" alt="Attacker getting ready to throw a ball">
+        <figcaption class="image-caption">Attacker getting ready to throw a ball</figcaption>
+      </figure>
+			<figure class="image-group" role="group">
+        <img class="image-thumb" src="img/defense1.jpg" alt="Defenders in front of their goal">
+        <figcaption class="image-caption">Defenders in front of their goal</figcaption>
+      </figure>
+    </section>
+
+    <section class="ls-page-section" id="tournaments-sect" aria-labelledby="tournaments">
+      <h2 class="section-title" id="tournaments">Schedule</h2>
+      <iframe class="external-frame" title="Google calendar showing the events Glasgow Goalball will be involved in" src="https://calendar.google.com/calendar/embed?showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=glasgowgoalball%40gmail.com&amp;color=%231B887A&amp;ctz=Etc%2FGMT" scrolling="no"></iframe>
+    </section>
+
+<!--***************************************** END OF MAIN CONTENT *********************************************-->
+
+		<%include ../partials/sidebar.ejs %>
+
+  </main>
+
+	<%- include("../partials/footer.ejs",
+		{
+			currentMenu: "Goalball"
+		});
+	%>
+
+</html>
