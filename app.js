@@ -228,6 +228,7 @@ app.post('/email', function(req, res){
     to: 'glasgowgoalball@gmail.com',
     subject: "message from " + name,
     replyTo: email,
+    phone: phone,
     condition: condition,
     sender: email,
     body: text
