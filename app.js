@@ -44,9 +44,13 @@ app.use(session({
 /********************* Helper functions *******************/
 
 let addZero = function(num){
-  if (num.toString.length == 1) {num = "0" + num;}
+  if (num.toString().length == 1) {num = "0" + num;}
   return num;
 };
+
+let formatDate = function(date) {
+  return addZero(date.getDate()) +"/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
+}
 
 
 
@@ -295,7 +299,7 @@ let blogRender = function(callback, options) {
 
       let article = '<article class="news-article article" role="region">';
       article += '<h3 class="section-subtitle">' + blog.title;
-      article += '<time class="article-date" datetime="' + datetime + '">' + blog.date.toLocaleDateString("en-GB") + '</time></h3>';
+      article += '<time class="article-date" datetime="' + datetime + '">' + formatDate(blog.date) + '</time></h3>';
       article +='<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>'
 
       if (blog.image) {
