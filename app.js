@@ -7,16 +7,15 @@ const express = require('express'),
     bcrypt = require("bcrypt"),
     session = require("express-session"),
     multer = require("multer"),
-    upload = multer({ dest: './static/blog/' });
+    upload = multer({ dest: './static/blog/' }),
+    dotenv = require('dotenv');
+    dotenv.load();
 
 
 
 /*********************** Initialisation ********************/
 
 let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 3000;
-}
 
 let app = express();
 app.set('view engine', 'ejs');
@@ -31,7 +30,7 @@ app.use(express.static(__dirname + "/static"));
 // initialize express-session to allow us track the logged-in user across sessions.
 app.use(session({
   key: 'user_sid',
-  secret: 'goalballPowah',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -69,7 +68,7 @@ app.locals = {
 
 /********************* database operations ****************/
 
-mongoose.connect('mongodb://admin:vtffs51!@ds241664.mlab.com:41664/goalball', {useNewUrlParser: true});
+mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -118,13 +117,13 @@ let Blog = mongoose.model('Blog', BlogSchema);
 
 mailer.extend(app, {
   from: 'glasgowgoalball@gmail.com',
-  host: 'smtp.sendgrid.net', // hostname
+  host: process.env.SMTP, // hostname
   secureConnection: true, // use SSL
   port: 465, // port for secure SMTP
   transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
   auth: {
-    user: 'apikey',
-    pass: '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'
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_SECRET
   }
 });
 
