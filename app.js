@@ -299,7 +299,7 @@ let blogRender = function(callback, options) {
       article +='<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>'
 
       if (blog.image) {
-        article += '<img class="blog-image" src="blog/' +blog.image + '">'
+        article += '<img class="blog-image" alt="" src="blog/' +blog.image + '">'
       }
 
       article += '</article>';

@@ -41,8 +41,8 @@
 
 <main id="main" class="ls-main-container">
 
-  <section class="ls-page-section">
-    <h2 class="section-title">Blog Post Entry</h2>
+  <section class="ls-page-section" aria-labelledby="blog-entry">
+    <h2 class="section-title" id="blog-entry">Blog Post Entry</h2>
     <form id="blog-form" action="/blogcreate" method="post" enctype="multipart/form-data">
       <br>
       <p class="form-component">
@@ -63,13 +63,13 @@
     </form>
   </section>
 
-	<section class="ls-page-section">
-		<h2 class="section-title">Blog Post Preview</h2>
+	<section class="ls-page-section" aria-labelledby="preview">
+		<h2 class="section-title" id="preview">Blog Post Preview</h2>
 		<article id="blog-preview">No entry to preview yet</article>
 	</section>
 
-	<section class="ls-page-section">
-		<h2 class="section-title">Current Blogs</h2>
+	<section class="ls-page-section" aria-labelledby="current-blogs">
+		<h2 class="section-title" id="current-blogs">Current Blogs</h2>
 		<%- articles %>
 	</section>
 
