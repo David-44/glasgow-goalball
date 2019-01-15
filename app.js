@@ -11,22 +11,21 @@ const express = require('express'),
     upload = multer({ dest: './static/blog/' }),
     dotenv = require('dotenv');
 
-    dotenv.load();
+
 
 
 
 /*********************** Initialisation ********************/
 
+dotenv.load();
 let port = process.env.PORT;
 
 let app = express();
 app.set('view engine', 'ejs');
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// Static files (CSS, images and client side javascript)
 app.use(express.static(__dirname + "/static"));
 
 // initialize express-session to allow us track the logged-in user across sessions.
@@ -58,7 +57,7 @@ let formatDate = function(date) {
 /*********************** EJS functions ********************/
 
 app.locals = {
-  checkCredentials  : function(credentials) {
+  checkCredentials: function(credentials) {
     if (credentials) {
       return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
     }
@@ -297,15 +296,20 @@ app.post('/blogcreate', upload.single('image'), function(req,res) {
     cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
       if (err){throw(err);}
       blogPost.image = result.url;
-      blogPost.save(function(err, blog){
+      blogPost.save(function(err){
         if (err) {throw(err);}
-        blogRender(function(articles){
-          res.render('admin', {articles: articles});
-        });
+        res.redirect('admin');
       });
 
     });
+  } else {
+    blogPost.save(function(err){
+      if (err) {throw(err);}
+      res.redirect('admin');
+    });
   }
+
+
 });
 
 
