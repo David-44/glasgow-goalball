@@ -7,8 +7,10 @@ const express = require('express'),
     bcrypt = require("bcrypt"),
     session = require("express-session"),
     multer = require("multer"),
+    cloudinary = require('cloudinary');
     upload = multer({ dest: './static/blog/' }),
     dotenv = require('dotenv');
+
     dotenv.load();
 
 
@@ -62,6 +64,18 @@ app.locals = {
     }
   }
 };
+
+
+
+
+
+/*********************** Cloudinary ***********************/
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+});
 
 
 
@@ -276,15 +290,22 @@ app.post('/blogcreate', upload.single('image'), function(req,res) {
 
   if (req.file) {
     let filename = req.file.filename;
-    blogPost.image = filename;
-  }
+    let options = {
+      folder: "goalball",
+      format: "jpg"
+    };
+    cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
+      if (err){throw(err);}
+      blogPost.image = result.url;
+      blogPost.save(function(err, blog){
+        if (err) {throw(err);}
+        blogRender(function(articles){
+          res.render('admin', {articles: articles});
+        });
+      });
 
-  blogPost.save(function(err, blog){
-    if (err) {throw(err);}
-    blogRender(function(articles){
-      res.render('admin', {articles: articles});
     });
-  });
+  }
 });
 
 
@@ -302,7 +323,7 @@ let blogRender = function(callback, options) {
       article +='<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>'
 
       if (blog.image) {
-        article += '<img class="blog-image" alt="" src="blog/' +blog.image + '">'
+        article += '<img class="blog-image" alt="" src="' +blog.image + '">'
       }
 
       article += '</article>';
