@@ -1,7 +1,6 @@
 const express = require('express'),
     path = require('path'),
     ejs = require('ejs'),
-    mailer = require('express-mailer'),
     bodyParser = require("body-parser"),
     mongoose = require('mongoose'),
     bcrypt = require("bcrypt"),
@@ -9,7 +8,10 @@ const express = require('express'),
     multer = require("multer"),
     cloudinary = require('cloudinary');
     upload = multer({ dest: './static/blog/' }),
-    dotenv = require('dotenv');
+    dotenv = require('dotenv'),
+
+    email = require('./controllers/email'),
+    routes = require('./routes');
 
 
 
@@ -22,6 +24,7 @@ let port = process.env.PORT;
 
 let app = express();
 app.set('view engine', 'ejs');
+email.init(app);
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -38,6 +41,8 @@ app.use(session({
       expires: 3600000
   }
 }));
+
+app.use('/', routes);
 
 
 
@@ -126,28 +131,6 @@ let Blog = mongoose.model('Blog', BlogSchema);
 
 
 
-/******************** email Init ***********************/
-
-mailer.extend(app, {
-  from: 'glasgowgoalball@gmail.com',
-  host: process.env.SMTP, // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_SECRET
-  }
-});
-
-// parameters used when loading the contact page
-let contactParameters = {
-  messageSent: false,
-  error: false
-};
-
-
-
 
 /******************* Server start ************************/
 
@@ -155,47 +138,6 @@ app.listen(port, () => {
     console.log('Server listing on ' + port);
 });
 
-
-
-
-
-/*********************** Get Routes ***************************/
-
-app.get(['/', '/index'], function(req, res) {
-  blogRender(function(articles){
-    res.render('index', {articles: articles});
-  });
-
-});
-
-app.get('/about', function(req, res) {
-    res.render('about');
-});
-
-app.get('/contact', function(req, res) {
-    res.render('contact', contactParameters);
-});
-
-app.get('/sport', function(req, res) {
-    res.render('sport');
-});
-
-app.get('/admin', function(req, res){
-  if (req.session.username ) {
-    blogRender(function(articles){
-      res.render('admin', {articles: articles});
-    });
-  } else {
-    res.render('login', { wrongCredentials : false });
-  }
-});
-
-app.get('/logout', function(req, res){
-  req.session.destroy(function(err){
-    if (err) { throw err };
-    res.render('login', { wrongCredentials : false });
-  });
-});
 
 
 
@@ -233,45 +175,45 @@ app.post('/admin', function(req, res){
 
 /******************* Sending emails ************************/
 
-app.post('/email', function(req, res){
-  let email = req.body.email,
-       name = req.body.name,
-      phone = req.body.phone,
-  condition = req.body.condition,
-       text = req.body.text;
-
-  app.mailer.send('email-admin', {
-    to: 'glasgowgoalball@gmail.com',
-    subject: "message from " + name,
-    replyTo: email,
-    phone: phone,
-    condition: condition,
-    sender: email,
-    body: text
-  }, function (err) {
-    if (err) {
-      console.log(err);
-      contactParameters.error = true;
-      res.render('contact', contactParameters);
-      return;
-    }
-  });
-
-  app.mailer.send('email-member', {
-    to: email,
-    subject: 'Message from the Glasgow Goalball Team'
-  }, function (err) {
-    if (err) {
-      console.log(err);
-      contactParameters.error = true;
-      res.render('contact', contactParameters);
-      return;
-    }
-  });
-
-  contactParameters.messageSent = true;
-  res.render('contact', contactParameters);
-});
+// app.post('/email', function(req, res){
+//   let email = req.body.email,
+//        name = req.body.name,
+//       phone = req.body.phone,
+//   condition = req.body.condition,
+//        text = req.body.text;
+//
+//   app.mailer.send('email-admin', {
+//     to: 'glasgowgoalball@gmail.com',
+//     subject: "message from " + name,
+//     replyTo: email,
+//     phone: phone,
+//     condition: condition,
+//     sender: email,
+//     body: text
+//   }, function (err) {
+//     if (err) {
+//       console.log(err);
+//       contactParameters.error = true;
+//       res.render('contact', contactParameters);
+//       return;
+//     }
+//   });
+//
+//   app.mailer.send('email-member', {
+//     to: email,
+//     subject: 'Message from the Glasgow Goalball Team'
+//   }, function (err) {
+//     if (err) {
+//       console.log(err);
+//       contactParameters.error = true;
+//       res.render('contact', contactParameters);
+//       return;
+//     }
+//   });
+//
+//   contactParameters.messageSent = true;
+//   res.render('contact', contactParameters);
+// });
 
 
 
