@@ -2,7 +2,7 @@
 
 let mailer = require('express-mailer');
 
-//
+// the email recipient, can go to a global config file in a large app, fine here in a small app
 let recipient = 'glasgowgoalball@gmail.com';
 
 
@@ -40,11 +40,11 @@ let mail = {
 
 
   // parses the body of the post request, sends the emails and renders contact
-  // for some reasons, the keyword "this" returns undefined in this method, so "mail" is used instead
+  // use with bind when used inside a router or event
   sendMail : function(req, res) {
 
     // test necessary because mail.app is initialised after mail.sendMail is parsed
-    if (mail.app){
+    if (this.app){
 
       try {
         let email = req.body.email,
@@ -54,7 +54,7 @@ let mail = {
              text = req.body.text;
 
     // sends email to recipient
-        mail.app.mailer.send('email-admin', {
+        this.app.mailer.send('email-admin', {
           to: recipient,
           subject: "message from " + name,
           replyTo: email,
@@ -67,7 +67,7 @@ let mail = {
         });
 
     // sends email to member
-        mail.app.mailer.send('email-member', {
+        this.app.mailer.send('email-member', {
           to: email,
           subject: 'Message from the Glasgow Goalball Team'
         }, function (err) {
@@ -75,13 +75,13 @@ let mail = {
         });
 
     // if no error, sets messageSent to write a message in the template
-        mail.contactParameters.messageSent = true;
+        this.contactParameters.messageSent = true;
 
       } catch(err) {
         console.log(err);
-        mail.contactParameters.error = true;
+        this.contactParameters.error = true;
       } finally {
-        res.render('contact', mail.contactParameters);
+        res.render('contact', this.contactParameters);
       }
     }
   }

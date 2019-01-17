@@ -48,7 +48,7 @@ router.get('/logout', function(req, res){
 
 // POST requests
 
-router.post('/email', email.sendMail);
+router.post('/email', email.sendMail.bind(email));
 
 
 

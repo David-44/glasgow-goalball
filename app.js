@@ -173,51 +173,6 @@ app.post('/admin', function(req, res){
 
 
 
-/******************* Sending emails ************************/
-
-// app.post('/email', function(req, res){
-//   let email = req.body.email,
-//        name = req.body.name,
-//       phone = req.body.phone,
-//   condition = req.body.condition,
-//        text = req.body.text;
-//
-//   app.mailer.send('email-admin', {
-//     to: 'glasgowgoalball@gmail.com',
-//     subject: "message from " + name,
-//     replyTo: email,
-//     phone: phone,
-//     condition: condition,
-//     sender: email,
-//     body: text
-//   }, function (err) {
-//     if (err) {
-//       console.log(err);
-//       contactParameters.error = true;
-//       res.render('contact', contactParameters);
-//       return;
-//     }
-//   });
-//
-//   app.mailer.send('email-member', {
-//     to: email,
-//     subject: 'Message from the Glasgow Goalball Team'
-//   }, function (err) {
-//     if (err) {
-//       console.log(err);
-//       contactParameters.error = true;
-//       res.render('contact', contactParameters);
-//       return;
-//     }
-//   });
-//
-//   contactParameters.messageSent = true;
-//   res.render('contact', contactParameters);
-// });
-
-
-
-
 /****************** Blog operations ************************/
 
 // Create Blog post in the database
