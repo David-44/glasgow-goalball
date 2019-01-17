@@ -7,7 +7,7 @@ const express = require('express'),
 
 
 router.get(['/', '/index'], function(req, res) {
-  blogRender(function(articles){
+  blog.blogRender(function(articles){
     res.render('index', {articles: articles});
   });
 

@@ -10,7 +10,9 @@ const express = require('express'),
     upload = multer({ dest: './static/blog/' }),
     dotenv = require('dotenv'),
 
+    models = require('./models'),
     email = require('./controllers/email'),
+    blog = require('./controllers/blog'),
     routes = require('./routes');
 
 
@@ -19,12 +21,12 @@ const express = require('express'),
 
 /*********************** Initialisation ********************/
 
-dotenv.load();
+dotenv.load(); // reads local environment file
 let port = process.env.PORT;
 
 let app = express();
 app.set('view engine', 'ejs');
-email.init(app);
+email.init(app); // initialises the email (see email.js)
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -45,17 +47,6 @@ app.use(session({
 app.use('/', routes);
 
 
-
-/********************* Helper functions *******************/
-
-let addZero = function(num){
-  if (num.toString().length == 1) {num = "0" + num;}
-  return num;
-};
-
-let formatDate = function(date) {
-  return addZero(date.getDate()) +"/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
-}
 
 
 
@@ -84,49 +75,12 @@ cloudinary.config({
 
 
 
-/********************* database operations ****************/
+/********************* database initialisation ****************/
 
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// User Authentication Schema
-let UserSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    trim: true
-  },
-  password: {
-    type: String,
-    required: true,
-  }
-});
-let User = mongoose.model('User', UserSchema);
-
-// Blog post Schema
-let BlogSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  date: {
-    type: Date,
-    required: true
-  },
-  text: {
-    type: String,
-    required: true,
-    trim: true
-  },
-  image: {
-    type: String,
-    required: false
-  }
-});
-let Blog = mongoose.model('Blog', BlogSchema);
+models.init(mongoose);
 
 
 
@@ -208,30 +162,3 @@ app.post('/blogcreate', upload.single('image'), function(req,res) {
 
 
 });
-
-
-
-// Formatting a post from the database
-let blogRender = function(callback, options) {
-  let query = Blog.find().sort({date : -1});
-  query.exec(function(err, blogs) {
-    let articles = blogs.map(function(blog){
-      let datetime = blog.date.getFullYear() + "-" + addZero(blog.date.getMonth() + 1) + "-" + addZero(blog.date.getDate());
-
-      let article = '<article class="news-article article" role="region">';
-      article += '<h3 class="section-subtitle">' + blog.title;
-      article += '<time class="article-date" datetime="' + datetime + '">' + formatDate(blog.date) + '</time></h3>';
-      article +='<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>'
-
-      if (blog.image) {
-        article += '<img class="blog-image" alt="" src="' +blog.image + '">'
-      }
-
-      article += '</article>';
-
-      return article;
-
-    });
-    callback(articles.join(""));
-  });
-};
