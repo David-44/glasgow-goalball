@@ -1,12 +1,13 @@
+'use strict';
+
 const express = require('express'),
     path = require('path'),
     ejs = require('ejs'),
     bodyParser = require("body-parser"),
     mongoose = require('mongoose'),
-    bcrypt = require("bcrypt"),
     session = require("express-session"),
     multer = require("multer"),
-    cloudinary = require('cloudinary');
+    cloudinary = require('cloudinary'),
     upload = multer({ dest: './static/blog/' }),
     dotenv = require('dotenv'),
 
@@ -31,6 +32,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+// css, script and images
 app.use(express.static(__dirname + "/static"));
 
 // initialize express-session to allow us track the logged-in user across sessions.
@@ -92,37 +94,6 @@ app.listen(port, () => {
     console.log('Server listing on ' + port);
 });
 
-
-
-
-
-/**************** Admin Authentication *********************/
-
-app.post('/admin', function(req, res){
-  let username = req.body.username,
-      password = req.body.password;
-
-  User.findOne( { username: username }, function(err, user) {
-    if (err) { throw err };
-    if ( user == null ) {
-      res.render('login', { wrongCredentials: true });
-      return;
-    }
-    bcrypt.compare(password, user.password, function(err, isMatch) {
-      if (err) {return console.log(err)};
-      if (isMatch) {
-        req.session.username = username;
-        blogRender(function(articles){
-          res.render('admin', {articles: articles});
-        });
-      } else {
-        res.render('login', { wrongCredentials: true });
-        return;
-      }
-    });
-  });
-
-});
 
 
 

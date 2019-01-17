@@ -1,10 +1,17 @@
 'use strict';
 
 const express = require('express'),
-      blog = require('./controllers/blog'),
-      email = require('./controllers/email'),
-      router = express.Router();
+  blog = require('./controllers/blog'),
+  credentials = require('./controllers/credentials'),
+  email = require('./controllers/email'),
 
+  router = express.Router();
+
+
+
+
+
+// GET routes
 
 router.get(['/', '/index'], function(req, res) {
   blog.blogRender(function(articles){
@@ -14,19 +21,19 @@ router.get(['/', '/index'], function(req, res) {
 });
 
 router.get('/about', function(req, res) {
-    res.render('about');
+  res.render('about');
 });
 
 router.get('/contact', function(req, res) {
-    res.render('contact', email.contactParameters);
+  res.render('contact', email.contactParameters);
 });
 
 router.get('/email', function(req, res) {
-    res.redirect('/contact');
+  res.redirect('/contact');
 });
 
 router.get('/sport', function(req, res) {
-    res.render('sport');
+  res.render('sport');
 });
 
 router.get('/admin', function(req, res){
@@ -46,9 +53,19 @@ router.get('/logout', function(req, res){
   });
 });
 
+// default routes, redirects to home insead of sending a 404
+router.get('*',function (req, res) {
+  res.redirect('/');
+});
+
+
+
+
+
 // POST requests
 
 router.post('/email', email.sendMail.bind(email));
+router.post('/admin', credentials.authenticate.bind(credentials));
 
 
 

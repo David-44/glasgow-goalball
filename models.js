@@ -1,6 +1,8 @@
 'use strict'
 
-// Normally there should be one model for each collection, but it is a small app
+// Normally there should be one model for each collection, but it is a small app...
+
+
 
 // user representation
 let user = {
@@ -16,31 +18,37 @@ let user = {
   }
 },
 
-  // blog representation
-  blog = {
-    title: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    date: {
-      type: Date,
-      required: true
-    },
-    text: {
-      type: String,
-      required: true,
-      trim: true
-    },
-    image: {
-      type: String,
-      required: false
-    }
-  };
 
-// to be exported
+
+// blog representation
+blog = {
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  date: {
+    type: Date,
+    required: true
+  },
+  text: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  image: {
+    type: String,
+    required: false
+  }
+};
+
+
+
+/*********************** modules **************************/
+
 const models = {
 
+  // models and schema properties
   userSchema : null,
   blogSchema : null,
   User : null, // to be used only for authentication
@@ -56,12 +64,22 @@ const models = {
   },
 
 
+
   // gets all the blog entries and passes them to callback(err, blogs)
   getBlog : function(callback) {
     let query = this.Blog.find().sort({date : -1});
     query.exec(callback);
     return;
+  },
+
+
+
+  // gets the user by username and passes it to callback(err, user)
+  getUser : function(username, callback) {
+    this.User.findOne( { username: username }, callback);
+    return;
   }
+
 };
 
 
