@@ -1,6 +1,7 @@
 'use strict';
 
-let models = require('../models');
+let cloudinary = require('cloudinary'),
+  models = require('../models');
 
 
 
@@ -21,7 +22,10 @@ let formatDate = function(date) {
 
 let blog = {
 
+
+
   // renders all the blogposts in an array and passes the array to a callback functions
+
   blogRender : function(callback) {
     models.getBlog(function(err, blogs){
 
@@ -45,7 +49,45 @@ let blog = {
       callback(articles.join(""));
     });
 
+  },
+
+
+
+  // saves a blog to the Blog model. Requires coudinary to be set
+
+  postBlog : function(req, res) {
+    let now = new Date(),
+    blogPost = new models.Blog({
+      title : req.body.title,
+      text : req.body.text,
+      date : now
+    });
+
+    // check if a file should be uploaed
+    if (req.file) {
+      let filename = req.file.filename;
+      // cloudinary options: cloudinary folder and file format
+      let options = {
+        folder: "goalball",
+        format: "jpg"
+      };
+      cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
+        if (err){throw(err);}
+        blogPost.image = result.url;
+        blogPost.save(function(err){
+          if (err) {throw(err);}
+          res.redirect('admin');
+        });
+
+      });
+    } else {
+      blogPost.save(function(err){
+        if (err) {throw(err);}
+        res.redirect('admin');
+      });
+    }
   }
+  
 
 };
 

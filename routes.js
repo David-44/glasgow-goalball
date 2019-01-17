@@ -1,6 +1,9 @@
 'use strict';
 
 const express = require('express'),
+  multer = require("multer"),
+  upload = multer({ dest: './static/blog/' }),
+
   blog = require('./controllers/blog'),
   credentials = require('./controllers/credentials'),
   email = require('./controllers/email'),
@@ -38,7 +41,7 @@ router.get('/sport', function(req, res) {
 
 router.get('/admin', function(req, res){
   if ( req.session.username ) {
-    blogRender(function(articles){
+    blog.blogRender(function(articles){
       res.render('admin', {articles: articles});
     });
   } else {
@@ -66,6 +69,7 @@ router.get('*',function (req, res) {
 
 router.post('/email', email.sendMail.bind(email));
 router.post('/admin', credentials.authenticate.bind(credentials));
+router.post('/blogcreate', upload.single('image'), blog.postBlog); // requires the multer module
 
 
 

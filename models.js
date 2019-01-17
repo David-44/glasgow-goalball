@@ -65,6 +65,14 @@ const models = {
 
 
 
+  // gets the user by username and passes it to callback(err, user)
+  getUser : function(username, callback) {
+    this.User.findOne( { username: username }, callback);
+    return;
+  },
+
+
+
   // gets all the blog entries and passes them to callback(err, blogs)
   getBlog : function(callback) {
     let query = this.Blog.find().sort({date : -1});
@@ -72,13 +80,6 @@ const models = {
     return;
   },
 
-
-
-  // gets the user by username and passes it to callback(err, user)
-  getUser : function(username, callback) {
-    this.User.findOne( { username: username }, callback);
-    return;
-  }
 
 };
 

@@ -6,9 +6,7 @@ const express = require('express'),
     bodyParser = require("body-parser"),
     mongoose = require('mongoose'),
     session = require("express-session"),
-    multer = require("multer"),
     cloudinary = require('cloudinary'),
-    upload = multer({ dest: './static/blog/' }),
     dotenv = require('dotenv'),
 
     models = require('./models'),
@@ -91,45 +89,5 @@ models.init(mongoose);
 /******************* Server start ************************/
 
 app.listen(port, () => {
-    console.log('Server listing on ' + port);
-});
-
-
-
-
-
-/****************** Blog operations ************************/
-
-// Create Blog post in the database
-app.post('/blogcreate', upload.single('image'), function(req,res) {
-  let now = new Date(),
-  blogPost = new Blog({
-    title : req.body.title,
-    text : req.body.text,
-    date : now
-  });
-
-  if (req.file) {
-    let filename = req.file.filename;
-    let options = {
-      folder: "goalball",
-      format: "jpg"
-    };
-    cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
-      if (err){throw(err);}
-      blogPost.image = result.url;
-      blogPost.save(function(err){
-        if (err) {throw(err);}
-        res.redirect('admin');
-      });
-
-    });
-  } else {
-    blogPost.save(function(err){
-      if (err) {throw(err);}
-      res.redirect('admin');
-    });
-  }
-
-
+    console.log('Server listening on ' + port);
 });
