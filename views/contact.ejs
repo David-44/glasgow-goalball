@@ -1,4 +1,4 @@
-<%- include("../partials/head.ejs",
+<%- include("./partials/head.ejs",
 	{
 		pageTitle: "Contact Us",
 		pageContent: "Contact Glasgow Goalball and come to practice with us."
@@ -10,9 +10,9 @@
 
 <body>
 
-<% include ../partials/svg.ejs %>
+<% include ./partials/svg.ejs %>
 
-<%- include("../partials/header.ejs",
+<%- include("./partials/header.ejs",
 	{
 		pageTitle: 'Contact Us',
 		currentMenu: "Contact"
@@ -67,11 +67,11 @@
 
 <!--***************************************** END OF MAIN CONTENT *********************************************-->
 
-		<%include ../partials/sidebar.ejs %>
+		<%include ./partials/sidebar.ejs %>
 
   </main>
 
-	<%- include("../partials/footer.ejs",
+	<%- include("./partials/footer.ejs",
 		{
 			currentMenu: "Contact"
 		});

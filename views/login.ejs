@@ -1,4 +1,4 @@
-<%- include("../partials/head.ejs",
+<%- include("./partials/head.ejs",
 	{
 		pageTitle: "Login Window",
 		pageContent: "Login window for the admin page of Glasgow Goalball"
@@ -8,9 +8,9 @@
 
 <body>
 
-<% include ../partials/svg.ejs %>
+<% include ./partials/svg.ejs %>
 
-<%- include("../partials/header.ejs",
+<%- include("./partials/header.ejs",
 	{
 		pageTitle: 'Please Login',
 		currentMenu: "Login"
@@ -38,7 +38,7 @@
 </main>
 
 
-<%- include("../partials/footer.ejs",
+<%- include("./partials/footer.ejs",
 	{
 		currentMenu: "Login"
 	});

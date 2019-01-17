@@ -1,4 +1,4 @@
-<%- include("../partials/head.ejs",
+<%- include("./partials/head.ejs",
 	{
 		pageTitle: "Home",
 		pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments."
@@ -11,9 +11,9 @@
 <body>
 
 
-<% include ../partials/svg.ejs %>
+<% include ./partials/svg.ejs %>
 
-<%- include("../partials/header.ejs",
+<%- include("./partials/header.ejs",
 	{
 		pageTitle: 'Welcome <span class="visually-hidden-small">to Glasgow Goalball</span></h1>',
 		currentMenu: "Home"
@@ -61,11 +61,11 @@
 
 <!--***************************************** END OF MAIN CONTENT *********************************************-->
 
-		<%include ../partials/sidebar.ejs %>
+		<%include ./partials/sidebar.ejs %>
 
 	</main>
 
-	<%- include("../partials/footer.ejs",
+	<%- include("./partials/footer.ejs",
 		{
 			currentMenu: "Home"
 		});

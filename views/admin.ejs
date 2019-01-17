@@ -1,6 +1,6 @@
 
 
-<%- include("../partials/head.ejs",
+<%- include("./partials/head.ejs",
 	{
 		pageTitle: "Admin Page",
 		pageContent: "Goalball Aministrations page."
@@ -11,7 +11,7 @@
 
 <body>
 
-<% include ../partials/svg.ejs %>
+<% include ./partials/svg.ejs %>
 
 <h1 class="page-title">Admin Page</h1>
 
@@ -78,7 +78,7 @@
 
 </main>
 
-<%- include("../partials/footer.ejs",
+<%- include("./partials/footer.ejs",
 	{
 		currentMenu: "Login"
 	});
