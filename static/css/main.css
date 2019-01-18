@@ -766,8 +766,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 99.5%; }
 
 /* line 509, ../scss/project/_modules.scss */
+/* max-height given by the facebook API */
 .facebook-link {
-  height: auto !important; }
+  height: auto !important;
+  max-height: 120px;}
 
 /* FOOTER ITEMS
 /*********************************************************************************/
