@@ -249,19 +249,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 100vw;
   order: 1; }
 
-  .banner-wrapper {
-    overflow: hidden;
-    padding: 0;
-    border: 0;
-    margin-bottom: -7px; /* magic number, for some reasons a margin appears at the bottom of the wrapper */
-
-    width: 100%;
-    /* Trims the picture around the middle character on small screen */
-    min-width: 1000px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 
 /* line 47, ../scss/project/_layout.scss */
 .ls-banner-picture {
