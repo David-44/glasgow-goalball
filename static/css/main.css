@@ -79,7 +79,7 @@ body {
   min-height: 100vh;
   max-width: 100%;
   max-width: 100vw;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
   box-sizing: border-box;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 1em;
@@ -242,11 +242,11 @@ h1, h2, h3, h4, h5, h6 {
 /* line 37, ../scss/project/_layout.scss */
 .ls-header {
   position: relative;
-
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
+  width: 100vw;
   order: 1; }
 
 /* line 47, ../scss/project/_layout.scss */
@@ -254,7 +254,6 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   /* Trims the picture around the middle character on small screen */
   min-width: 1000px;
-  overflow-x: hidden !important;
   position: relative;
   left: 50%;
   transform: translateX(-50%); }
