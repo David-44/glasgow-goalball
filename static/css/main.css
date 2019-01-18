@@ -251,6 +251,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
   /* Trims the picture around the middle character on small screen */
   min-width: 1000px;
+  min-height: 30%;
   overflow: hidden;
   position: relative;
   left: 50%;
