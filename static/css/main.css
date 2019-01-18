@@ -242,7 +242,7 @@ h1, h2, h3, h4, h5, h6 {
 /* line 37, ../scss/project/_layout.scss */
 .ls-header {
   position: relative;
-  overflow-x: hidden !important;
+
   display: flex;
   flex-wrap: wrap;
   align-items: center;
