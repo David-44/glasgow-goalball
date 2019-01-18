@@ -244,6 +244,7 @@ h1, h2, h3, h4, h5, h6 {
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
+  min-height: 35%;
   order: 1; }
 
 /* line 47, ../scss/project/_layout.scss */
