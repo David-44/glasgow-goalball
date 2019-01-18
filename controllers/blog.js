@@ -69,6 +69,8 @@ let blog = {
       // cloudinary options: cloudinary folder and file format
       let options = {
         folder: "goalball",
+        width: 1000,
+        crop: "fit",
         format: "jpg"
       };
       cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
@@ -87,7 +89,7 @@ let blog = {
       });
     }
   }
-  
+
 
 };
 
