@@ -99,13 +99,15 @@ function buildPost() {
 
 const init = function() {
 
+	hideMenusSmallScreen();
+	currentYear.innerHTML = new Date().getFullYear().toString();
+
 	// Events
 	hamburg.onclick = toggleMenus;
 	window.onresize = hideMenusSmallScreen;
-	preview.onclick = buildPost;
-
-	hideMenusSmallScreen();
-	currentYear.innerHTML = new Date().getFullYear().toString();
+	if (preview) {
+		preview.onclick = buildPost;
+	}
 
 	// keep last because sometimes it blocks due to cross-origin error
 	toArray(iFrames).forEach(function(frame){
