@@ -1,22 +1,3 @@
-<%- include("./partials/head.ejs",
-	{
-		pageTitle: "Login Window",
-		pageContent: "Login window for the admin page of Glasgow Goalball"
-	});
-%>
-
-
-<body>
-
-<% include ./partials/svg.ejs %>
-
-<%- include("./partials/header.ejs",
-	{
-		pageTitle: 'Please Login',
-		currentMenu: "Login"
-	});
-%>
-
 <main id="main" class="ls-main-container">
   <section class="ls-page-section">
     <h2 class="visually-hidden">Contact Form</h2>
@@ -35,15 +16,3 @@
       <button class="button" type="submit" value="submit">Login</button>
     </form>
   </section>
-</main>
-
-
-<%- include("./partials/footer.ejs",
-	{
-		currentMenu: "Login"
-	});
-%>
-
-</body>
-
-</html>

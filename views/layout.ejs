@@ -1,4 +1,4 @@
-<% locals.filePath = "./site/" + template + ".ejs"; %>
+<% let filePath = "./site/" + template + ".ejs"; %>
 
 
 <%- include("./partials/head.ejs",
@@ -14,20 +14,21 @@
 
 <% include ./partials/svg.ejs %>
 
-<%- include("./partials/header.ejs",
-	{
-		pageTitle: mainTitle,
-		currentMenu: currentMenu
-	});
-%>
+<% if (typeof noHeader == 'undefined') { %>
+	<%- include("./partials/header.ejs",
+		{
+			pageTitle: mainTitle,
+			currentMenu: currentMenu
+		}); %>
+<%	} %>
 
 
-
-<%- include(locals.filePath) %>
-
+<%- include(filePath) %>
 
 
-<%include ./partials/sidebar.ejs %>
+<% if (typeof noSidebar == 'undefined') { %>
+	<% include ./partials/sidebar.ejs %>
+<% } %>
 
 </main>
 

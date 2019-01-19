@@ -3,7 +3,8 @@
 let bcrypt = require("bcrypt"),
 
   models = require('../models'),
-  blog = require('./blog');
+  blog = require('./blog'),
+  views = require('../views');
 
 
 
@@ -23,7 +24,8 @@ let credentials = {
 
       // if user doesn't exist, back to login window with wrong credentials
       if ( user == null ) {
-        res.render('login', { wrongCredentials: true });
+        views.login.wrongCredentials = true;
+        res.render('layout', views.login);
         return;
       }
 
@@ -34,13 +36,16 @@ let credentials = {
 
           // adds a session username and launch the admin page
           req.session.username = username;
+          views.login.wrongCredentials = false;
           blog.blogRender(function(articles){
-            res.render('admin', {articles: articles});
+            views.admin.articles = articles;
+            res.render('layout', views.admin);
           });
 
           // if the password is wrong, sending wrng credentials message
         } else {
-          res.render('login', { wrongCredentials: true });
+          views.login.wrongCredentials = true;
+          res.render('layout', views.login);
           return;
         }
       });

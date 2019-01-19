@@ -1,18 +1,3 @@
-
-
-<%- include("./partials/head.ejs",
-	{
-		pageTitle: "Admin Page",
-		pageContent: "Goalball Aministrations page."
-	});
-%>
-
-
-
-<body>
-
-<% include ./partials/svg.ejs %>
-
 <h1 class="page-title">Admin Page</h1>
 
 <header class="ls-header black-back" aria-label="site header">
@@ -72,17 +57,3 @@
 		<h2 class="section-title" id="current-blogs">Current Blogs</h2>
 		<%- articles %>
 	</section>
-
-
-
-
-</main>
-
-<%- include("./partials/footer.ejs",
-	{
-		currentMenu: "Login"
-	});
-%>
-
-</body>
-</html>

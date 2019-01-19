@@ -22,12 +22,13 @@ router.get(['/', '/index'], function(req, res) {
     views.index.articles = articles;
     res.render('layout', views.index);
   });
-
 });
+
 
 router.get('/about', function(req, res) {
   res.render('layout', views.about);
 });
+
 
 router.get('/contact', function(req, res) {
   for (var k in email.contactParameters)
@@ -37,6 +38,7 @@ router.get('/contact', function(req, res) {
   res.render('layout', views.contact);
 });
 
+
 router.get('/sport', function(req, res) {
   res.render('layout', views.sport);
 });
@@ -44,17 +46,19 @@ router.get('/sport', function(req, res) {
 router.get('/admin', function(req, res){
   if ( req.session.username ) {
     blog.blogRender(function(articles){
-      res.render('admin', {articles: articles});
+      views.admin.articles = articles;
+      res.render('layout', views.admin);
     });
   } else {
-    res.render('login', { wrongCredentials : false });
+    res.render('layout', views.login);
   }
 });
+
 
 router.get('/logout', function(req, res){
   req.session.destroy(function(err){
     if (err) { throw err };
-    res.render('login', { wrongCredentials : false });
+    res.render('layout', views.login);
   });
 });
 
@@ -62,6 +66,7 @@ router.get('/logout', function(req, res){
 router.get('/email', function(req, res) {
   res.redirect('/contact');
 });
+
 
 // default routes, redirects to home insead of sending a 404
 router.get('*',function (req, res) {

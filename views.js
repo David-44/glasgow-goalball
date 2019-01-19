@@ -32,6 +32,27 @@ let views = {
     pageContent: "Contact Glasgow Goalball and come to practice with us.",
     currentMenu: "Contact",
     mainTitle: 'Contact Us'
+  },
+
+  login : {
+    template: "login",
+    pageTitle: "Login Window",
+    pageContent: "Login window to the administrative page of Glasgow Goalball.",
+    currentMenu: "none",
+    mainTitle: 'Please Login',
+    wrongCredentials: false,
+    noSidebar: true
+  },
+
+  admin : {
+    template: "admin",
+    pageTitle: "Admin Page",
+    pageContent: "Administrative page of Glasgow Goalball.",
+    currentMenu: "none",
+    mainTitle: 'Please Login',
+    wrongCredentials: false,
+    noSidebar: true,
+    noHeader : true
   }
 
 }
