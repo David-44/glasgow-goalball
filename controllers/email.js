@@ -55,7 +55,7 @@ let mail = {
              text = req.body.text;
 
     // sends email to recipient
-        this.app.mailer.send('email-admin', {
+        this.app.mailer.send('./email/recipient', {
           to: recipient,
           subject: "message from " + name,
           replyTo: email,
@@ -68,7 +68,7 @@ let mail = {
         });
 
     // sends email to member
-        this.app.mailer.send('email-member', {
+        this.app.mailer.send('./email/member', {
           to: email,
           subject: 'Message from the Glasgow Goalball Team'
         }, function (err) {
