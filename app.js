@@ -25,15 +25,24 @@ let port = process.env.PORT;
 
 let app = express();
 app.set('view engine', 'ejs');
-email.init(app); // initialises the email (see email.js)
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// css, script and images
+// initialises the email functionnality with sendgrid.com (see email.js)
+email.init(app);
+
+// serving css, script and images
 app.use(express.static(__dirname + "/static"));
 
-// initialize express-session to allow us track the logged-in user across sessions.
+// loading express router
+app.use('/', routes);
+
+
+
+
+/********************* Session config **********************/
+
 app.use(session({
   key: 'user_sid',
   secret: process.env.SESSION_SECRET,
@@ -44,14 +53,13 @@ app.use(session({
   }
 }));
 
-app.use('/', routes);
 
 
 
 
+/*********************** EJS config ************************/
 
-/*********************** EJS functions ********************/
-
+// writes a small message if login check went wrong
 app.locals = {
   checkCredentials: function(credentials) {
     if (credentials) {
@@ -60,13 +68,14 @@ app.locals = {
   }
 };
 
+// all the menus of the site
 app.locals.menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]];
 
 
 
 
 
-/*********************** Cloudinary ***********************/
+/********************* Cloudinary Config *********************/
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
@@ -77,7 +86,7 @@ cloudinary.config({
 
 
 
-/********************* database initialisation ****************/
+/******************** database initialisation ****************/
 
 mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true});
 let db = mongoose.connection;
@@ -88,7 +97,7 @@ models.init(mongoose);
 
 
 
-/******************* Server start ************************/
+/********************** Server start ************************/
 
 app.listen(port, () => {
     console.log('Server listening on ' + port);
