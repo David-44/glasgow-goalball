@@ -1,5 +1,7 @@
-<% let filePath = "./site/" + template + ".ejs"; %>
+<% let body = "./site/" + template + ".ejs"; %>
 
+<!DOCTYPE html>
+<html lang="en-GB">
 
 <%- include("./partials/head.ejs",
 	{
@@ -15,15 +17,16 @@
 <% include ./partials/svg.ejs %>
 
 <% if (typeof noHeader == 'undefined') { %>
-	<%- include("./partials/header.ejs",
-		{
-			pageTitle: mainTitle,
-			currentMenu: currentMenu
-		}); %>
+	<%- include("./partials/header.ejs", {
+		pageTitle: mainTitle,
+		currentMenu: currentMenu
+	}); %>
 <%	} %>
 
 
-<%- include(filePath) %>
+
+<%- include(body) %>
+
 
 
 <% if (typeof noSidebar == 'undefined') { %>

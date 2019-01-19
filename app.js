@@ -60,6 +60,8 @@ app.locals = {
   }
 };
 
+app.locals.menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]];
+
 
 
 

@@ -1,4 +1,3 @@
-<% let menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]]; %>
 <h1 class="page-title"><%- pageTitle %></h1>
 
 <header class="ls-header black-back" aria-label="site header">
@@ -18,7 +17,7 @@
     </button>
     <ul id="nav-menus" class="nav-menus is-hidden">
 
-      <% menus.forEach( menu => { %>
+      <% locals.menus.forEach( menu => { %>
         <% if (menu[0] == currentMenu) { %>
           <li class="nav-menus-item"><span class="visually-hidden">Current: </span><span class="nav-menus-text"><%= currentMenu %></span></li>
         <% } else { %>
