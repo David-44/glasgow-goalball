@@ -1,28 +1,3 @@
-<%- include("./partials/head.ejs",
-	{
-		pageTitle: "About",
-		pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments."
-	});
-%>
-
-
-
-<body>
-
-<% include ./partials/svg.ejs %>
-
-<%- include("./partials/header.ejs",
-	{
-		pageTitle: 'About<span class="visually-hidden-small"> Glasgow Goalball</span><span aria-hidden="true" class="hidden-large"> Us</span>',
-		currentMenu: "About Us"
-	});
-%>
-
-
-
-
-<!--***************************************** MAIN CONTENT *********************************************-->
-
   <main id="main" class="ls-main-container">
 
     <section class="ls-page-section" aria-labelledby="testimonials">
@@ -77,18 +52,3 @@
       <p>You will need comfortable sports wear for example: a long sleeved sports top with track suit bottoms and trainers are typically worn.</p>
       <p>The club provides the goal ball, knee pads, elbow pads, and black out masks.</p>
     </section>
-
-<!--***************************************** END OF MAIN CONTENT *********************************************-->
-
-		<%include ./partials/sidebar.ejs %>
-
-  </main>
-
-	<%- include("./partials/footer.ejs",
-		{
-			currentMenu: "About Us"
-		});
-	%>
-
-</body>
-</html>

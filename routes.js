@@ -7,6 +7,7 @@ const express = require('express'),
   blog = require('./controllers/blog'),
   credentials = require('./controllers/credentials'),
   email = require('./controllers/email'),
+  views = require('./views.js'),
 
   router = express.Router();
 
@@ -18,25 +19,26 @@ const express = require('express'),
 
 router.get(['/', '/index'], function(req, res) {
   blog.blogRender(function(articles){
-    res.render('index', {articles: articles});
+    views.index.articles = articles;
+    res.render('layout', views.index);
   });
 
 });
 
 router.get('/about', function(req, res) {
-  res.render('about');
+  res.render('layout', views.about);
 });
 
 router.get('/contact', function(req, res) {
-  res.render('contact', email.contactParameters);
-});
-
-router.get('/email', function(req, res) {
-  res.redirect('/contact');
+  for (var k in email.contactParameters)
+  {
+    views.contact[k] = email.contactParameters[k];
+  }
+  res.render('layout', views.contact);
 });
 
 router.get('/sport', function(req, res) {
-  res.render('sport');
+  res.render('layout', views.sport);
 });
 
 router.get('/admin', function(req, res){
@@ -54,6 +56,11 @@ router.get('/logout', function(req, res){
     if (err) { throw err };
     res.render('login', { wrongCredentials : false });
   });
+});
+
+
+router.get('/email', function(req, res) {
+  res.redirect('/contact');
 });
 
 // default routes, redirects to home insead of sending a 404

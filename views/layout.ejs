@@ -1,0 +1,41 @@
+<% locals.filePath = "./" + template + ".ejs"; %>
+
+
+<%- include("./partials/head.ejs",
+	{
+		pageTitle: pageTitle,
+		pageContent: pageContent
+	});
+%>
+
+
+
+<body>
+
+<% include ./partials/svg.ejs %>
+
+<%- include("./partials/header.ejs",
+	{
+		pageTitle: mainTitle,
+		currentMenu: currentMenu
+	});
+%>
+
+
+
+<%- include(locals.filePath) %>
+
+
+
+<%include ./partials/sidebar.ejs %>
+
+</main>
+
+<%- include("./partials/footer.ejs",
+{
+  currentMenu: currentMenu
+});
+%>
+
+</body>
+</html>

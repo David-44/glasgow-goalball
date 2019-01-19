@@ -1,27 +1,3 @@
-<%- include("./partials/head.ejs",
-	{
-		pageTitle: "What is Goalball",
-		pageContent: "Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980."
-	});
-%>
-
-<body>
-
-
-<% include ./partials/svg.ejs %>
-
-<%- include("./partials/header.ejs",
-	{
-		pageTitle: '<span class="visually-hidden-small">About </span>Goalball',
-		currentMenu: "Goalball"
-	});
-%>
-
-
-
-
-<!--***************************************** MAIN CONTENT *********************************************-->
-
   <main id="main" class="ls-main-container">
 
     <section class="ls-page-section" aria-labelledby="what">
@@ -59,17 +35,3 @@
       <h2 class="section-title" id="tournaments">Schedule</h2>
       <iframe class="external-frame" title="Google calendar showing the events Glasgow Goalball will be involved in" src="https://calendar.google.com/calendar/embed?showCalendars=0&amp;showTz=0&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=glasgowgoalball%40gmail.com&amp;color=%231B887A&amp;ctz=Etc%2FGMT" scrolling="no"></iframe>
     </section>
-
-<!--***************************************** END OF MAIN CONTENT *********************************************-->
-
-		<%include ./partials/sidebar.ejs %>
-
-  </main>
-
-	<%- include("./partials/footer.ejs",
-		{
-			currentMenu: "Goalball"
-		});
-	%>
-
-</html>
