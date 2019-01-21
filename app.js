@@ -36,13 +36,10 @@ email.init(app);
 // serving css, script and images
 app.use(express.static(__dirname + "/static"));
 
+// initialises EJS variables to be passed to locals
+views.init(app);
 
-
-
-
-
-/********************* Session config **********************/
-
+// Session config
 app.use(session({
   key: 'user_sid',
   secret: process.env.SESSION_SECRET,
@@ -52,10 +49,6 @@ app.use(session({
       expires: 3600000
   }
 }));
-
-// initialises EJS variables to be passed to locals
-
-views.init(app);
 
 // loading express router (should be done after session)
 app.use('/', routes);
