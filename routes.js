@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express'),
-  multer = require("multer"),
+  multer = require('multer'),
   upload = multer({ dest: './static/blog/' }),
 
   blog = require('./controllers/blog'),
@@ -50,8 +50,7 @@ router.get('/admin', function(req, res){
 
 
 router.get('/logout', function(req, res){
-  req.session.destroy(function(err){
-    if (err) { throw err };
+  req.session.destroy(function(){
     res.render('layout', views.login);
   });
 });
