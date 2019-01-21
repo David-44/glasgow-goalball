@@ -60,8 +60,8 @@ let views = {
   init : function(app) {
     // writes a small message if login check went wrong
     app.locals = {
-      checkCredentials: function(credentials) {
-        if (credentials) {
+      checkCredentials: function(wrongCredentials) {
+        if (wrongCredentials) {
           return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
         }
       }

@@ -18,10 +18,7 @@ const express = require('express'),
 // GET routes
 
 router.get(['/', '/index'], function(req, res) {
-  blog.blogRender(function(articles){
-    views.index.articles = articles;
-    res.render('layout', views.index);
-  });
+  blog.blogRender(views.index, res);
 });
 
 
@@ -45,10 +42,7 @@ router.get('/sport', function(req, res) {
 
 router.get('/admin', function(req, res){
   if ( req.session.username ) {
-    blog.blogRender(function(articles){
-      views.admin.articles = articles;
-      res.render('layout', views.admin);
-    });
+    blog.blogRender(views.admin, res);
   } else {
     res.render('layout', views.login);
   }

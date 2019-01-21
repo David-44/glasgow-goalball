@@ -24,9 +24,9 @@ let blog = {
 
 
 
-  // renders all the blogposts in an array and passes the array to a callback functions
+  // renders all the blogposts and passes them as articles to the correct body
 
-  blogRender : function(callback) {
+  blogRender : function(view, res) {
     models.getBlog(function(err, blogs){
 
       let articles = blogs.map(function(blog){
@@ -46,7 +46,8 @@ let blog = {
         return article;
 
       });
-      callback(articles.join(""));
+      view.articles = articles.join("");
+      res.render('layout', view);
     });
 
   },

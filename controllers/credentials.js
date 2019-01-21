@@ -37,10 +37,7 @@ let credentials = {
           // adds a session username and launch the admin page
           req.session.username = username;
           views.login.wrongCredentials = false;
-          blog.blogRender(function(articles){
-            views.admin.articles = articles;
-            res.render('layout', views.admin);
-          });
+          blog.blogRender(views.admin, res);
 
           // if the password is wrong, sending wrng credentials message
         } else {
