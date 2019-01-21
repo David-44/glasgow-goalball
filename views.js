@@ -53,6 +53,22 @@ let views = {
     wrongCredentials: false,
     noSidebar: true,
     noHeader : true
+  },
+
+
+  // Initialisation of the app.locals file used by EJS templates
+  init : function(app) {
+    // writes a small message if login check went wrong
+    app.locals = {
+      checkCredentials: function(credentials) {
+        if (credentials) {
+          return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
+        }
+      }
+    };
+
+    // all the menus of the site
+    app.locals.menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]];
   }
 
 }

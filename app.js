@@ -12,7 +12,8 @@ const express = require('express'),
     models = require('./models'),
     email = require('./controllers/email'),
     blog = require('./controllers/blog'),
-    routes = require('./routes');
+    routes = require('./routes'),
+    views = require('./views');
 
 
 
@@ -35,8 +36,7 @@ email.init(app);
 // serving css, script and images
 app.use(express.static(__dirname + "/static"));
 
-// loading express router
-app.use('/', routes);
+
 
 
 
@@ -53,23 +53,12 @@ app.use(session({
   }
 }));
 
+// initialises EJS variables to be passed to locals
 
+views.init(app);
 
-
-
-/*********************** EJS config ************************/
-
-// writes a small message if login check went wrong
-app.locals = {
-  checkCredentials: function(credentials) {
-    if (credentials) {
-      return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
-    }
-  }
-};
-
-// all the menus of the site
-app.locals.menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]];
+// loading express router (should be done after session)
+app.use('/', routes);
 
 
 
