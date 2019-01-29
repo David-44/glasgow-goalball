@@ -257,7 +257,8 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 1000px;
   position: relative;
   left: 50%;
-  transform: translateX(-50%); }
+  transform: translateX(-50%);
+  overflow: none 1important; }
 
 /* Nav bar */
 /* line 66, ../scss/project/_layout.scss */
