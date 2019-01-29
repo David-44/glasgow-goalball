@@ -63,6 +63,7 @@ html {
 *, *::before, *::after {
   box-sizing: inherit; }
 
+
 /* line 13, ../scss/base/_base.scss */
 html {
   font-size: 16px; }
@@ -79,7 +80,7 @@ body {
   min-height: 100vh;
   max-width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   box-sizing: border-box;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 1em;
@@ -257,8 +258,7 @@ h1, h2, h3, h4, h5, h6 {
   min-width: 1000px;
   position: relative;
   left: 50%;
-  transform: translateX(-50%);
-  overflow: hidden !important; }
+  transform: translateX(-50%); }
 
 /* Nav bar */
 /* line 66, ../scss/project/_layout.scss */
