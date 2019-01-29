@@ -45,7 +45,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 /* line 106, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/typography/_vertical_rhythm.scss */
 html {
   font-size: 100%;
-  line-height: 1.5em; }
+  line-height: 1.5em;
+  overflow-x: hidden;}
 
 /* line 31, ../scss/abstracts/_mixins.scss */
 .nav-menus-item a, .footer-section-item a {
@@ -80,7 +81,7 @@ body {
   min-height: 100vh;
   max-width: 100%;
   max-width: 100vw;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
   box-sizing: border-box;
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 1em;
