@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Normally there should be one model for each collection, but it is a small app...
 

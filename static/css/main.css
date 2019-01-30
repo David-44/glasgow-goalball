@@ -254,6 +254,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* line 47, ../scss/project/_layout.scss */
 .ls-banner-picture {
+  background-color: #030029;
+
+  min-height: 70%;
   width: 100%;
   /* Trims the picture around the middle character on small screen */
   min-width: 1000px;
