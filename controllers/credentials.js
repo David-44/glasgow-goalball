@@ -38,6 +38,7 @@ let credentials = {
           req.session.username = username;
           views.login.wrongCredentials = false;
           blog.blogRender(views.admin, res);
+          return;
 
           // if the password is wrong, sending wrng credentials message
         } else {

@@ -10,6 +10,7 @@ let recipient = 'glasgowgoalball@gmail.com';
 
 // module to be exported
 let mail = {
+  
   // the Express app, set during initialisation
   app : null,
 

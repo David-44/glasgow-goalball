@@ -61,6 +61,7 @@ const models = {
     this.blogSchema = new mongoose.Schema(blog);
     this.User = mongoose.model('User', this.userSchema);
     this.Blog = mongoose.model('Blog', this.blogSchema);
+    return;
   },
 
 

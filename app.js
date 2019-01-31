@@ -37,7 +37,7 @@ email.init(app);
 app.use(express.static(__dirname + "/static"));
 
 // initialises EJS variables to be passed to locals
-views.init(app);
+views.init(app, ejs);
 
 // Session config
 app.use(session({

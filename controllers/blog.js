@@ -7,11 +7,13 @@ let cloudinary = require('cloudinary'),
 
 /********************* Helper functions *******************/
 
+// takes an integer as parameter, adds a leading 0 if it contains only one digit
 let addZero = function(num){
   if (num.toString().length == 1) {num = "0" + num;}
   return num;
 };
 
+// takes a date object and formats it using british convention (heroku doesn't take GB locals)
 let formatDate = function(date) {
   return addZero(date.getDate()) +"/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
 }
@@ -25,6 +27,8 @@ let blog = {
 
 
   // renders all the blogposts and passes them as articles to the correct body
+  // requires the views Module
+  // view is the property from the views object
 
   blogRender : function(view, res) {
     models.getBlog(function(err, blogs){
@@ -55,7 +59,6 @@ let blog = {
 
 
   // saves a blog to the Blog model. Requires coudinary to be set
-
   postBlog : function(req, res) {
     let now = new Date(),
     blogPost = new models.Blog({
@@ -64,7 +67,7 @@ let blog = {
       date : now
     });
 
-    // check if a file should be uploaed
+    // check if a file should be uploaded
     if (req.file) {
       let filename = req.file.filename;
       // cloudinary options: cloudinary folder and file format

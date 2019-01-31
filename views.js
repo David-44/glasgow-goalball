@@ -57,7 +57,8 @@ let views = {
 
 
   // Initialisation of the app.locals file used by EJS templates
-  init : function(app) {
+  // arguments are a handle to the express app and a handle to the ejs module
+  init : function(app, ejs) {
     // writes a small message if login check went wrong
     app.locals = {
       checkCredentials: function(wrongCredentials) {
