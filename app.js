@@ -26,18 +26,14 @@ let port = process.env.PORT;
 
 let app = express();
 app.set('view engine', 'ejs');
+
+// bodyparser used by post requests
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// initialises the email functionnality with sendgrid.com (see email.js)
-email.init(app);
-
 // serving css, script and images
 app.use(express.static(__dirname + "/static"));
-
-// initialises EJS variables to be passed to locals
-views.init(app, ejs);
 
 // Session config
 app.use(session({
@@ -52,6 +48,15 @@ app.use(session({
 
 // loading express router (should be done after session)
 app.use('/', routes);
+
+
+
+
+// initialises the email functionnality with sendgrid.com (see email.js)
+email.init(app);
+
+// initialises EJS variables to be passed to locals
+views.init(app, ejs);
 
 
 
@@ -92,8 +97,8 @@ let db = mongoose.connection;
 
 // disconnects on error in order to force an auto reconnect
 db.on('error', function(error) {
-    console.error('Error in MongoDb connection: ' + error);
-    mongoose.disconnect();
+  console.error('Error in MongoDb connection: ' + error);
+  mongoose.disconnect();
 });
 
 // initialises all user schemas
@@ -106,5 +111,5 @@ models.init(mongoose);
 /********************** Server start ************************/
 
 app.listen(port, () => {
-    console.log('Server listening on ' + port);
+  console.log('Server listening on ' + port);
 });

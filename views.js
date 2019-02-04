@@ -41,6 +41,7 @@ let views = {
     currentMenu: "none",
     mainTitle: 'Please Login',
     wrongCredentials: false,
+    dbErrorMessage: false,
     noSidebar: true
   },
 
@@ -59,11 +60,20 @@ let views = {
   // Initialisation of the app.locals file used by EJS templates
   // arguments are a handle to the express app and a handle to the ejs module
   init : function(app, ejs) {
-    // writes a small message if login check went wrong
+
     app.locals = {
+
+    // writes a small message if login check went wrong (used by login page)
       checkCredentials: function(wrongCredentials) {
         if (wrongCredentials) {
           return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
+        }
+      },
+
+    // writes a small message if there was an error accessing the database (used by login page)
+      dbError: function(dbErrorMessage) {
+        if (dbErrorMessage) {
+          return ejs.render('<p class="bold-font">Error contacting the database, please contact the administrator</p>');
         }
       }
     };

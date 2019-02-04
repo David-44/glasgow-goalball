@@ -6,6 +6,20 @@ let bcrypt = require("bcrypt"),
   blog = require('./blog'),
   views = require('../views');
 
+// adds the db error message if there is an error
+let loginError = function (err) {
+  views.login.dbErrorMessage = true;
+  console.log(err);
+  res.render('layout', views.login);
+  return;
+};
+
+// adds the wrong login sentence when credentials are wrong
+let wrongLogin = function (res) {
+  views.login.wrongCredentials = true;
+  res.render('layout', views.login);
+  return;
+};
 
 
 
@@ -20,18 +34,21 @@ let credentials = {
 
     // try to get the matching user if it exists
     models.getUser( username, function(err, user) {
-      if (err) { return console.log(err); }
+      if (err) {
+        loginError(err);
+      }
 
       // if user doesn't exist, back to login window with wrong credentials
       if ( user == null ) {
-        views.login.wrongCredentials = true;
-        res.render('layout', views.login);
+        wrongLogin(res);
         return;
       }
 
       // if the user exists, compare the crypted passwords
       bcrypt.compare(password, user.password, function(err, isMatch) {
-        if (err) { return console.log(err); }
+        if (err) {
+          loginError(err);
+        }
         if (isMatch) {
 
           // adds a session username and launch the admin page
@@ -40,10 +57,9 @@ let credentials = {
           blog.blogRender(views.admin, res);
           return;
 
-          // if the password is wrong, sending wrng credentials message
+        // if the password is wrong, sending wrong credentials message
         } else {
-          views.login.wrongCredentials = true;
-          res.render('layout', views.login);
+          wrongLogin(res);
           return;
         }
       });

@@ -3,6 +3,7 @@
     <h2 class="visually-hidden">Contact Form</h2>
 
 		<%- checkCredentials(wrongCredentials) %>
+    <%- dbError(dbErrorMessage) %>
 
 		<form id="admin-form" action="/admin" method="post">
       <p class="form-component">
