@@ -70,9 +70,33 @@ cloudinary.config({
 
 /******************** database initialisation ****************/
 
-mongoose.connect(process.env.DB_CONNECT, {useNewUrlParser: true});
+// Used to setup the auto reconnect to fire every 5 minutes
+// useNewUrlParser is a required option
+let mongooseOptions = {
+  useNewUrlParser: true,
+  autoReconnect: true,
+  reconnectTries: Number.MAX_VALUE,
+  reconnectInterval: 30000
+};
+
+// establishes connection, takes URI directly from process.env
+
+
+mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function(err) {
+  if (err) {
+    console.log('Unable to connect to the server. Please start the server. Error:', err);
+  }
+});
+
 let db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// disconnects on error in order to force an auto reconnect
+db.on('error', function(error) {
+    console.error('Error in MongoDb connection: ' + error);
+    mongoose.disconnect();
+});
+
+// initialises all user schemas
 models.init(mongoose);
 
 

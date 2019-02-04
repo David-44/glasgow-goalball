@@ -4,13 +4,13 @@ let mailer = require('express-mailer'),
   views = require('../views');
 
 // the email recipient, can go to a global config file in a large app, fine here in a small app
-let recipient = 'glasgowgoalball@gmail.com';
+let recipient = 'GlasgowGoalball@outlook.com';
 
 
 
 // module to be exported
 let mail = {
-  
+
   // the Express app, set during initialisation
   app : null,
 

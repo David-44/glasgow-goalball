@@ -33,6 +33,10 @@ let blog = {
   blogRender : function(view, res) {
     models.getBlog(function(err, blogs){
 
+      if (err) {
+        throw err;
+      }
+
       let articles = blogs.map(function(blog){
         let datetime = blog.date.getFullYear() + "-" + addZero(blog.date.getMonth() + 1) + "-" + addZero(blog.date.getDate());
 
