@@ -3,8 +3,37 @@
 let mailer = require('express-mailer'),
   views = require('../views');
 
+
 // the email recipient, can go to a global config file in a large app, fine here in a small app
 let recipient = 'GlasgowGoalball@outlook.com';
+
+
+// function that deals with email errors
+// needs to be passed the error and response objects
+let emailError = function(err, res) {
+  console.log(err);
+  views.contact.error = true;
+  res.render('layout', views.contact);
+  return;
+};
+
+
+// checks for presence (used for form validation)
+let isPresent = function(str) {
+  return (str != undefined);
+};
+
+
+// email validation, regexp shamelessly borrowed from
+// https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
+let validateEmail = function(email) {
+  let re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (isPresent(email)) {
+    return re.test(String(email).toLowerCase());
+  }
+};
+
+
 
 
 
@@ -13,12 +42,6 @@ let mail = {
 
   // the Express app, set during initialisation
   app : null,
-
-  // variables used to add to the 'contact' template
-  contactParameters : {
-    messageSent: false, // sets to true if emails have been sent without error
-    error: false // sets to true if the emails were not sent
-  },
 
 
 
@@ -47,48 +70,52 @@ let mail = {
 
     // test necessary because mail.app is initialised after mail.sendMail is parsed
     if (this.app){
+      let email, name, phone, condition, text;
 
-      try {
-        let email = req.body.email,
-             name = req.body.name,
-            phone = req.body.phone,
+      // Validation, to keep it extra simple we validate only the email
+      if (validateEmail(req.body.email)) {
+        email = req.body.email,
+        name = req.body.name,
+        phone = req.body.phone,
         condition = req.body.condition,
-             text = req.body.text;
-
-    // sends email to recipient
-        this.app.mailer.send('./email/recipient', {
-          to: recipient,
-          subject: "message from " + name,
-          replyTo: email,
-          phone: phone,
-          condition: condition,
-          sender: email,
-          body: text
-        }, function (err) {
-          if (err) { throw err; }
-        });
-
-    // sends email to member
-        this.app.mailer.send('./email/member', {
-          to: email,
-          subject: 'Message from the Glasgow Goalball Team'
-        }, function (err) {
-          if (err) { throw err; }
-        });
-
-    // if no error, sets messageSent to write a message in the template
-        this.contactParameters.messageSent = true;
-
-      } catch(err) {
-        console.log(err);
-        this.contactParameters.error = true;
-      } finally {
-        for (var k in this.contactParameters)
-        {
-          views.contact[k] = this.contactParameters[k];
-        }
+        text = req.body.text;
+      } else {
+        views.contact.emailValid = false;
         res.render('layout', views.contact);
+        return;
       }
+
+  // sends email to recipient
+      this.app.mailer.send('./email/recipient', {
+        to: recipient,
+        subject: "message from " + name,
+        replyTo: email,
+        phone: phone,
+        condition: condition,
+        sender: email,
+        body: text
+      }, function (err) {
+        if (err) {
+          emailError(err, res);
+          return;
+        }
+      });
+
+  // sends email to member
+      this.app.mailer.send('./email/member', {
+        to: email,
+        subject: 'Message from the Glasgow Goalball Team'
+      }, function (err) {
+        if (err) {
+          emailError(err, res);
+          return;
+        }
+      });
+
+      // setting messageSent to true if there is no error
+      views.contact.messageSent = true;
+      res.render('layout', views.contact);
+      return;
     }
   }
 

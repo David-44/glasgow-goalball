@@ -31,7 +31,10 @@ let views = {
     pageTitle: "Contact Us",
     pageContent: "Contact Glasgow Goalball and come to practice with us.",
     currentMenu: "Contact",
-    mainTitle: 'Contact Us'
+    mainTitle: 'Contact Us',
+    messageSent: false, // sets to true if emails have been sent without error
+    error: false, // sets to true if the emails were not sent
+    emailValid: true // sets an error message if the email has not been validated
   },
 
   login : {
@@ -63,6 +66,9 @@ let views = {
 
     app.locals = {
 
+      // site menus used by navigation bars
+      menus : [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]],
+
     // writes a small message if login check went wrong (used by login page)
       checkCredentials: function(wrongCredentials) {
         if (wrongCredentials) {
@@ -70,16 +76,28 @@ let views = {
         }
       },
 
-    // writes a small message if there was an error accessing the database (used by login page)
+    // writes a small message if there was an error accessing the database
+    // Used on credentials and blog controllers
       dbError: function(dbErrorMessage) {
         if (dbErrorMessage) {
           return ejs.render('<p class="bold-font">Error contacting the database, please contact the administrator</p>');
         }
+      },
+
+    // writes a small message regarding the status of message sent (message sent, error or invalid email)
+    // Used on contact page
+      renderContact: function() {
+        if (views.contact.messageSent) {
+          return ejs.render('<p class="bold-font">Thank you! Your message has been sent, we will come back to you shortly.</p>');
+        } else if (views.contact.error) {
+          return ejs.render('<p class="bold-font">There was an error sending the message, plase try again later or send us an email to <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a></p>');
+        } else if (!views.contact.emailValid) {
+          return ejs.render('<p class="bold-font">The email address provided is not correct, please try again.</p>');
+        } else {
+          return ejs.render('<p>If you want to be in touch, you can either send us an email at <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a> or fill the form below.</p>');
+        }
       }
     };
-
-    // all the menus of the site
-    app.locals.menus = [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]];
   }
 
 }

@@ -4,13 +4,8 @@
     <h2 class="visually-hidden">Contact Form</h2>
     <form id="contact-form" action="/email" method="post">
 
-			<%if (messageSent) { %>
-				<p class="bold-font">Thank you! Your message has been sent.</p>
-			<% } else if (error) { %>
-				<p class="bold-font">There was an error sending the message, plase try again later or send us an email to <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a></p>
-			<% } else { %>
-      	<p>If you want to be in touch, you can either send us an email at <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a> or fill the form below.</p>
-			<% } %>
+      <%- renderContact(); %>
+
 			<br>
 
       <p class="form-component">
