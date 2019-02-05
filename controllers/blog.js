@@ -29,13 +29,13 @@ let blog = {
 
 
   // renders all the blogposts and passes them as articles to the correct body
-  // requires the views Module
-  // view is the property from the views object
+  // the structure of blogposts is described in the models module (required)
+  // view is the view being rendered, property from the views object (required)
 
   blogRender : function(view, res) {
     models.getBlog(function(err, blogs){
 
-      let articles = null;
+      let articles = "";
 
       // In case of an error getting the blogs, render the view normally with no article
       // and log the error
@@ -45,6 +45,7 @@ let blog = {
         return;
       }
 
+      // builds the articles array of html strings
       articles = blogs.map(function(blog){
         let datetime = blog.date.getFullYear() + "-" + addZero(blog.date.getMonth() + 1) + "-" + addZero(blog.date.getDate());
 
@@ -62,6 +63,7 @@ let blog = {
         return article;
 
       });
+
       view.articles = articles.join("");
       res.render('layout', view);
       return;

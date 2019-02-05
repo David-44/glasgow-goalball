@@ -85,7 +85,7 @@ let mail = {
         return;
       }
 
-  // sends email to recipient
+      // sends email to recipient
       this.app.mailer.send('./email/recipient', {
         to: recipient,
         subject: "message from " + name,
@@ -101,7 +101,7 @@ let mail = {
         }
       });
 
-  // sends email to member
+      // sends email to member
       this.app.mailer.send('./email/member', {
         to: email,
         subject: 'Message from the Glasgow Goalball Team'
@@ -112,7 +112,7 @@ let mail = {
         }
       });
 
-      // setting messageSent to true if there is no error
+      // renders the page with the thank you message if there is no error
       views.contact.messageSent = true;
       res.render('layout', views.contact);
       return;

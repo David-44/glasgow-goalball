@@ -28,10 +28,6 @@ router.get('/about', function(req, res) {
 
 
 router.get('/contact', function(req, res) {
-  for (var k in email.contactParameters)
-  {
-    views.contact[k] = email.contactParameters[k];
-  }
   res.render('layout', views.contact);
 });
 
@@ -40,6 +36,7 @@ router.get('/sport', function(req, res) {
   res.render('layout', views.sport);
 });
 
+// admin checks if user is logged in
 router.get('/admin', function(req, res){
   if ( req.session.username ) {
     blog.blogRender(views.admin, res);

@@ -19,7 +19,7 @@ const express = require('express'),
 
 
 
-/*********************** Initialisation ********************/
+/*************** Initialisation and Middlewares *****************/
 
 dotenv.load(); // reads local environment file
 let port = process.env.PORT;
@@ -28,22 +28,20 @@ let app = express();
 app.set('view engine', 'ejs');
 
 // bodyparser used by post requests
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // serving css, script and images
 app.use(express.static(__dirname + "/static"));
 
 // Session config
 app.use(session({
-  key: 'user_sid',
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-      expires: 3600000
-  }
+    key: 'user_sid',
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 3600000
+    }
 }));
 
 // loading express router (should be done after session)
@@ -85,8 +83,6 @@ let mongooseOptions = {
 };
 
 // establishes connection, takes URI directly from process.env
-
-
 mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function(err) {
   if (err) {
     console.log('Unable to connect to the server. Please start the server. Error:', err);

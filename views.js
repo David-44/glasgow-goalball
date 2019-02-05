@@ -69,23 +69,23 @@ let views = {
       // site menus used by navigation bars
       menus : [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]],
 
-    // writes a small message if login check went wrong (used by login page)
+      // writes a small message if login check went wrong (used by login page)
       checkCredentials: function(wrongCredentials) {
         if (wrongCredentials) {
           return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
         }
       },
 
-    // writes a small message if there was an error accessing the database
-    // Used on credentials and blog controllers
+      // writes a small message if there was an error accessing the database
+      // Used on credentials and blog controllers
       dbError: function(dbErrorMessage) {
         if (dbErrorMessage) {
           return ejs.render('<p class="bold-font">Error contacting the database, please contact the administrator</p>');
         }
       },
 
-    // writes a small message regarding the status of message sent (message sent, error or invalid email)
-    // Used on contact page
+      // writes a small message regarding the status of message sent (message sent, error or invalid email)
+      // Used on contact page
       renderContact: function() {
         if (views.contact.messageSent) {
           return ejs.render('<p class="bold-font">Thank you! Your message has been sent, we will come back to you shortly.</p>');
