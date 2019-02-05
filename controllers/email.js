@@ -1,16 +1,16 @@
 'use strict';
 
-let mailer = require('express-mailer'),
-  views = require('../views');
+const mailer = require('express-mailer'),
+    views = require('../views');
 
 
 // the email recipient, can go to a global config file in a large app, fine here in a small app
-let recipient = 'GlasgowGoalball@outlook.com';
+const recipient = 'GlasgowGoalball@outlook.com';
 
 
 // function that deals with email errors
 // needs to be passed the error and response objects
-let emailError = function(err, res) {
+const emailError = function(err, res) {
   console.log(err);
   views.contact.error = true;
   res.render('layout', views.contact);
@@ -19,14 +19,14 @@ let emailError = function(err, res) {
 
 
 // checks for presence (used for form validation)
-let isPresent = function(str) {
+const isPresent = function(str) {
   return (str != undefined);
 };
 
 
 // email validation, regexp shamelessly borrowed from
 // https://stackoverflow.com/questions/46155/how-to-validate-an-email-address-in-javascript
-let validateEmail = function(email) {
+const validateEmail = function(email) {
   let re =  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (isPresent(email)) {
     return re.test(String(email).toLowerCase());
@@ -38,7 +38,7 @@ let validateEmail = function(email) {
 
 
 // module to be exported
-let mail = {
+const mail = {
 
   // the Express app, set during initialisation
   app : null,
@@ -46,7 +46,7 @@ let mail = {
 
 
   // Initialising the mailer and setting the app
-  init : function(app) {
+  init: function(app) {
     mailer.extend(app, {
       from: recipient,
       host: process.env.SMTP,
@@ -66,7 +66,7 @@ let mail = {
 
   // parses the body of the post request, sends the emails and renders contact
   // use with bind when used inside a router or event
-  sendMail : function(req, res) {
+  sendMail: function(req, res) {
 
     // test necessary because mail.app is initialised after mail.sendMail is parsed
     if (this.app){

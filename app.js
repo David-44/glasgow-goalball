@@ -22,9 +22,9 @@ const express = require('express'),
 /*************** Initialisation and Middlewares *****************/
 
 dotenv.load(); // reads local environment file
-let port = process.env.PORT;
+const port = process.env.PORT;
 
-let app = express();
+const app = express();
 app.set('view engine', 'ejs');
 
 // bodyparser used by post requests
@@ -75,7 +75,7 @@ cloudinary.config({
 
 // Used to setup the auto reconnect to fire every 5 minutes
 // useNewUrlParser is a required option
-let mongooseOptions = {
+const mongooseOptions = {
   useNewUrlParser: true,
   autoReconnect: true,
   reconnectTries: Number.MAX_VALUE,
@@ -89,7 +89,7 @@ mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function(err) {
   }
 });
 
-let db = mongoose.connection;
+const db = mongoose.connection;
 
 // disconnects on error in order to force an auto reconnect
 db.on('error', function(error) {

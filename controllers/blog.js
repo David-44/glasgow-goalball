@@ -1,21 +1,21 @@
 'use strict';
 
-let cloudinary = require('cloudinary'),
-  models = require('../models'),
-  views = require('../views');
+const cloudinary = require('cloudinary'),
+    models = require('../models'),
+    views = require('../views');
 
 
 
 /********************* Helper functions *******************/
 
 // takes an integer as parameter, adds a leading 0 if it contains only one digit
-let addZero = function(num){
+const addZero = function(num){
   if (num.toString().length == 1) {num = "0" + num;}
   return num;
 };
 
 // takes a date object and formats it using british convention (heroku doesn't take GB locals)
-let formatDate = function(date) {
+const formatDate = function(date) {
   return addZero(date.getDate()) +"/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
 }
 
@@ -24,7 +24,7 @@ let formatDate = function(date) {
 
 /************************ Module **********************/
 
-let blog = {
+const blog = {
 
 
 
@@ -32,7 +32,7 @@ let blog = {
   // the structure of blogposts is described in the models module (required)
   // view is the view being rendered, property from the views object (required)
 
-  blogRender : function(view, res) {
+  blogRender: function(view, res) {
     models.getBlog(function(err, blogs){
 
       let articles = "";
@@ -74,12 +74,12 @@ let blog = {
 
 
   // saves a blog to the Blog model. Requires coudinary to be set
-  postBlog : function(req, res) {
+  postBlog: function(req, res) {
     let now = new Date(),
     blogPost = new models.Blog({
-      title : req.body.title,
-      text : req.body.text,
-      date : now
+      title: req.body.title,
+      text: req.body.text,
+      date: now
     });
 
     // check if a file should be uploaded
@@ -92,12 +92,16 @@ let blog = {
         crop: "fit",
         format: "jpg"
       };
+
       cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
         if (err){
           models.dbError(err, res, views.admin);
           return;
         }
+        // assigns the path of the image to the blog post
         blogPost.image = result.url;
+
+        // registers the blog into the database
         blogPost.save(function(err){
           if (err) {
             models.dbError(err, res, views.admin);
@@ -105,7 +109,6 @@ let blog = {
           res.redirect('admin');
           return;
         });
-
       });
     } else {
       blogPost.save(function(err){

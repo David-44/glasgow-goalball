@@ -49,14 +49,14 @@ blog = {
 const models = {
 
   // models and schema properties
-  userSchema : null,
-  blogSchema : null,
-  User : null, // to be used only for authentication
-  Blog : null, // blog model, to be used with blog CRUD
+  userSchema: null,
+  blogSchema: null,
+  User: null, // to be used only for authentication
+  Blog: null, // blog model, to be used with blog CRUD
 
   // Initialises all the models
   // the parameter mongoose is a handler to an instance of the mongoose object
-  init : function(mongoose) {
+  init: function(mongoose) {
     this.userSchema = new mongoose.Schema(user);
     this.blogSchema = new mongoose.Schema(blog);
     this.User = mongoose.model('User', this.userSchema);
@@ -67,7 +67,7 @@ const models = {
 
 
   // gets the user by username and passes it to callback(err, user)
-  getUser : function(username, callback) {
+  getUser: function(username, callback) {
     this.User.findOne( { username: username }, callback);
     return;
   },
@@ -75,7 +75,7 @@ const models = {
 
 
   // gets all the blog entries and passes them to callback(err, blogs)
-  getBlog : function(callback) {
+  getBlog: function(callback) {
     let query = this.Blog.find().sort({date : -1});
     query.exec(callback);
     return;
@@ -86,7 +86,7 @@ const models = {
   // takes as parameter, the error and response objects
   // and the view object from the views module (normally views.admin)
   // since db errors are rendered only on the admin page, redirect to admin
-  dbError : function(err, res, view) {
+  dbError: function(err, res, view) {
     console.log(err);
     view.dbErrorMessage = true;
     res.redirect('/admin');

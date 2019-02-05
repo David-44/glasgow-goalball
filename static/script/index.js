@@ -34,16 +34,16 @@ const navMenus  = document.getElementById("nav-menus"),
 // Helper functions
 
 
-let addZero = function(num){
+const addZero = function(num){
   if (num.toString.length == 1) {num = "0" + num;}
   return num;
 };
 
 
 function toArray(obj) {
-  var array = [];
+  let array = [];
   // iterate backwards ensuring that length is an UInt32
-  for (var i = obj.length >>> 0; i--;) {
+  for (let i = obj.length >>> 0; i--;) {
     array[i] = obj[i];
   }
   return array;

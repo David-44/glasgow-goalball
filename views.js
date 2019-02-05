@@ -1,8 +1,12 @@
 'use strict';
 
-let views = {
+const views = {
 
-  index : {
+  // All the parameters that will be used for rendering the body parts of the views
+  // in the site folder
+  // the name of the object matches the name of the file
+
+  index: {
     template: "index",
     pageTitle: "Home",
     pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.",
@@ -10,7 +14,7 @@ let views = {
     mainTitle: 'Welcome <span class="visually-hidden-small">to Glasgow Goalball</span></h1>'
   },
 
-  about : {
+  about: {
     template: "about",
     pageTitle: "About",
     pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.",
@@ -18,7 +22,7 @@ let views = {
     mainTitle: 'About<span class="visually-hidden-small"> Glasgow Goalball</span><span aria-hidden="true" class="hidden-large"> Us</span>'
   },
 
-  sport : {
+  sport: {
     template: "sport",
     pageTitle: "What is Goalball",
     pageContent: "Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980.",
@@ -26,7 +30,7 @@ let views = {
     mainTitle: '<span class="visually-hidden-small">About </span>Goalball'
   },
 
-  contact : {
+  contact: {
     template: "contact",
     pageTitle: "Contact Us",
     pageContent: "Contact Glasgow Goalball and come to practice with us.",
@@ -37,7 +41,7 @@ let views = {
     emailValid: true // sets an error message if the email has not been validated
   },
 
-  login : {
+  login: {
     template: "login",
     pageTitle: "Login Window",
     pageContent: "Login window to the administrative page of Glasgow Goalball.",
@@ -48,7 +52,7 @@ let views = {
     noSidebar: true
   },
 
-  admin : {
+  admin: {
     template: "admin",
     pageTitle: "Admin Page",
     pageContent: "Administrative page of Glasgow Goalball.",
@@ -62,12 +66,12 @@ let views = {
 
   // Initialisation of the app.locals file used by EJS templates
   // arguments are a handle to the express app and a handle to the ejs module
-  init : function(app, ejs) {
+  init: function(app, ejs) {
 
     app.locals = {
 
       // site menus used by navigation bars
-      menus : [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]],
+      menus: [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]],
 
       // writes a small message if login check went wrong (used by login page)
       checkCredentials: function(wrongCredentials) {

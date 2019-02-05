@@ -1,15 +1,15 @@
 'use strict';
 
 const express = require('express'),
-  multer = require('multer'),
-  upload = multer({ dest: './static/blog/' }),
+    multer = require('multer'),
+    upload = multer({ dest: './static/blog/' }),
 
-  blog = require('./controllers/blog'),
-  credentials = require('./controllers/credentials'),
-  email = require('./controllers/email'),
-  views = require('./views.js'),
+    blog = require('./controllers/blog'),
+    credentials = require('./controllers/credentials'),
+    email = require('./controllers/email'),
+    views = require('./views.js'),
 
-  router = express.Router();
+    router = express.Router();
 
 
 

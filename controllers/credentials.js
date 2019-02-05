@@ -1,15 +1,15 @@
 'use strict';
 
-let bcrypt = require("bcrypt"),
+const bcrypt = require("bcrypt"),
 
-  models = require('../models'),
-  blog = require('./blog'),
-  views = require('../views');
+    models = require('../models'),
+    blog = require('./blog'),
+    views = require('../views');
 
 
 // adds the wrong login sentence when credentials are wrong
 // takes the response object as parameter
-let wrongLogin = function (res) {
+const wrongLogin = function (res) {
   views.login.wrongCredentials = true;
   res.render('layout', views.login);
   return;
@@ -17,10 +17,10 @@ let wrongLogin = function (res) {
 
 
 
-let credentials = {
+const credentials = {
 
   // authenticates user, requires bcrypt and the session middleware to be setup
-  authenticate : function(req, res) {
+  authenticate: function(req, res) {
 
     // get credentials from the request body
     if (!req.body.username || !req.body.password) {
@@ -31,14 +31,14 @@ let credentials = {
         password = req.body.password;
 
     // try to get the matching user if it exists
-    models.getUser( username, function(err, user) {
+    models.getUser(username, function(err, user) {
       if (err) {
         models.dbError(err, res, views.login);
         return;
       }
 
       // if user doesn't exist, back to login window with wrong credentials
-      if ( user == null ) {
+      if (user == null) {
         wrongLogin(res);
         return;
       }
