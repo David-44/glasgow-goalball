@@ -7,6 +7,7 @@ let bcrypt = require("bcrypt"),
   views = require('../views');
 
 // adds the db error message if there is an error
+// takes the error object as parameter
 let loginError = function (err) {
   views.login.dbErrorMessage = true;
   console.log(err);
@@ -15,6 +16,7 @@ let loginError = function (err) {
 };
 
 // adds the wrong login sentence when credentials are wrong
+// takes the response object as parameter
 let wrongLogin = function (res) {
   views.login.wrongCredentials = true;
   res.render('layout', views.login);
@@ -29,13 +31,18 @@ let credentials = {
   authenticate : function(req, res) {
 
     // get credentials from the request body
+    if (!req.body.username || !req.body.password) {
+      wrongLogin(res);
+      return;
+    }
     let username = req.body.username,
-      password = req.body.password;
+        password = req.body.password;
 
     // try to get the matching user if it exists
     models.getUser( username, function(err, user) {
       if (err) {
         loginError(err);
+        return;
       }
 
       // if user doesn't exist, back to login window with wrong credentials
@@ -48,6 +55,7 @@ let credentials = {
       bcrypt.compare(password, user.password, function(err, isMatch) {
         if (err) {
           loginError(err);
+          return;
         }
         if (isMatch) {
 
