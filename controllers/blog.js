@@ -1,7 +1,8 @@
 'use strict';
 
 let cloudinary = require('cloudinary'),
-  models = require('../models');
+  models = require('../models'),
+  views = require('../views');
 
 
 
@@ -20,6 +21,7 @@ let formatDate = function(date) {
 
 
 
+
 /************************ Module **********************/
 
 let blog = {
@@ -33,11 +35,17 @@ let blog = {
   blogRender : function(view, res) {
     models.getBlog(function(err, blogs){
 
+      let articles = null;
+
+      // In case of an error getting the blogs, render the view normally with no article
+      // and log the error
       if (err) {
-        throw err;
+        console.log(err);
+        res.render('layout', view);
+        return;
       }
 
-      let articles = blogs.map(function(blog){
+      articles = blogs.map(function(blog){
         let datetime = blog.date.getFullYear() + "-" + addZero(blog.date.getMonth() + 1) + "-" + addZero(blog.date.getDate());
 
         let article = '<article class="news-article article" role="region">';
@@ -56,6 +64,7 @@ let blog = {
       });
       view.articles = articles.join("");
       res.render('layout', view);
+      return;
     });
 
   },
@@ -82,18 +91,27 @@ let blog = {
         format: "jpg"
       };
       cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
-        if (err){throw(err);}
+        if (err){
+          models.dbError(err, res, views.admin);
+          return;
+        }
         blogPost.image = result.url;
         blogPost.save(function(err){
-          if (err) {throw(err);}
+          if (err) {
+            models.dbError(err, res, views.admin);
+          }
           res.redirect('admin');
+          return;
         });
 
       });
     } else {
       blogPost.save(function(err){
-        if (err) {throw(err);}
+        if (err) {
+          models.dbError(err, res, views.admin);
+        }
         res.redirect('admin');
+        return;
       });
     }
   }

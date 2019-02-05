@@ -28,6 +28,9 @@
 
   <section class="ls-page-section" aria-labelledby="blog-entry">
     <h2 class="section-title" id="blog-entry">Blog Post Entry</h2>
+
+    <%- dbError(dbErrorMessage); %>
+
     <form id="blog-form" action="/blogcreate" method="post" enctype="multipart/form-data">
       <br>
       <p class="form-component">

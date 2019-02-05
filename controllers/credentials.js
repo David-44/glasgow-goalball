@@ -6,14 +6,6 @@ let bcrypt = require("bcrypt"),
   blog = require('./blog'),
   views = require('../views');
 
-// adds the db error message if there is an error
-// takes the error object as parameter
-let loginError = function (err) {
-  views.login.dbErrorMessage = true;
-  console.log(err);
-  res.render('layout', views.login);
-  return;
-};
 
 // adds the wrong login sentence when credentials are wrong
 // takes the response object as parameter
@@ -41,7 +33,7 @@ let credentials = {
     // try to get the matching user if it exists
     models.getUser( username, function(err, user) {
       if (err) {
-        loginError(err);
+        models.dbError(err, res, views.login);
         return;
       }
 
@@ -54,7 +46,7 @@ let credentials = {
       // if the user exists, compare the crypted passwords
       bcrypt.compare(password, user.password, function(err, isMatch) {
         if (err) {
-          loginError(err);
+          models.dbError(err, res, views.login);
           return;
         }
         if (isMatch) {

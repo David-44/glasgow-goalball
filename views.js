@@ -51,7 +51,7 @@ let views = {
     pageContent: "Administrative page of Glasgow Goalball.",
     currentMenu: "none",
     mainTitle: 'Please Login',
-    wrongCredentials: false,
+    dbErrorMessage: false,
     noSidebar: true,
     noHeader : true
   },

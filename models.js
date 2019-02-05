@@ -82,6 +82,17 @@ const models = {
   },
 
 
+  // deals with errors accessing the database or cloudinary
+  // takes as parameter, the error and response objects
+  // and the view object from the view module which should render the view error
+  dbError : function(err, res, view) {
+    console.log(err);
+    view.dbErrorMessage = true;
+    res.redirect('/admin');
+    return;
+  }
+
+
 };
 
 
