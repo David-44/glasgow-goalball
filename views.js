@@ -7,34 +7,34 @@ const views = {
   // the name of the object matches the name of the file
 
   index: {
-    template: "index",
-    pageTitle: "Home",
-    pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.",
-    currentMenu: "Home",
+    template: 'index',
+    pageTitle: 'Home',
+    pageContent: 'Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.',
+    currentMenu: 'Home',
     mainTitle: 'Welcome <span class="visually-hidden-small">to Glasgow Goalball</span></h1>'
   },
 
   about: {
-    template: "about",
-    pageTitle: "About",
-    pageContent: "Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.",
-    currentMenu: "About Us",
+    template: 'about',
+    pageTitle: 'About',
+    pageContent: 'Goalball Glasgow is a club of goalball, a paralympic sport played around the world by people with visual impairments.',
+    currentMenu: 'About Us',
     mainTitle: 'About<span class="visually-hidden-small"> Glasgow Goalball</span><span aria-hidden="true" class="hidden-large"> Us</span>'
   },
 
   sport: {
-    template: "sport",
-    pageTitle: "What is Goalball",
-    pageContent: "Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980.",
-    currentMenu: "Goalball",
+    template: 'sport',
+    pageTitle: 'What is Goalball',
+    pageContent: 'Goalball was formed in 1946 by an Austrian and German man to assist the rehabilitation of visually impaired war veterans, it progressed to become a Paralympics sport in 1980.',
+    currentMenu: 'Goalball',
     mainTitle: '<span class="visually-hidden-small">About </span>Goalball'
   },
 
   contact: {
-    template: "contact",
-    pageTitle: "Contact Us",
-    pageContent: "Contact Glasgow Goalball and come to practice with us.",
-    currentMenu: "Contact",
+    template: 'contact',
+    pageTitle: 'Contact Us',
+    pageContent: 'Contact Glasgow Goalball and come to practice with us.',
+    currentMenu: 'Contact',
     mainTitle: 'Contact Us',
     messageSent: false, // sets to true if emails have been sent without error
     error: false, // sets to true if the emails were not sent
@@ -42,10 +42,10 @@ const views = {
   },
 
   login: {
-    template: "login",
-    pageTitle: "Login Window",
-    pageContent: "Login window to the administrative page of Glasgow Goalball.",
-    currentMenu: "none",
+    template: 'login',
+    pageTitle: 'Login Window',
+    pageContent: 'Login window to the administrative page of Glasgow Goalball.',
+    currentMenu: 'none',
     mainTitle: 'Please Login',
     wrongCredentials: false,
     dbErrorMessage: false,
@@ -53,10 +53,10 @@ const views = {
   },
 
   admin: {
-    template: "admin",
-    pageTitle: "Admin Page",
-    pageContent: "Administrative page of Glasgow Goalball.",
-    currentMenu: "none",
+    template: 'admin',
+    pageTitle: 'Admin Page',
+    pageContent: 'Administrative page of Glasgow Goalball.',
+    currentMenu: 'none',
     mainTitle: 'Please Login',
     dbErrorMessage: false,
     noSidebar: true,
@@ -71,7 +71,7 @@ const views = {
     app.locals = {
 
       // site menus used by navigation bars
-      menus: [["Home", "index"], ["About Us", "about"], ["Goalball", "sport"], ["Contact", "contact"]],
+      menus: [['Home', 'index'], ['About Us', 'about'], ['Goalball', 'sport'], ['Contact', 'contact']],
 
       // writes a small message if login check went wrong (used by login page)
       checkCredentials: function(wrongCredentials) {

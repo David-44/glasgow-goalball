@@ -31,7 +31,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // serving css, script and images
-app.use(express.static(__dirname + "/static"));
+app.use(express.static(__dirname + '/static'));
 
 // Session config
 app.use(session({

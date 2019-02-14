@@ -10,13 +10,13 @@ const cloudinary = require('cloudinary'),
 
 // takes an integer as parameter, adds a leading 0 if it contains only one digit
 const addZero = function(num){
-  if (num.toString().length == 1) {num = "0" + num;}
+  if (num.toString().length == 1) {num = '0' + num;}
   return num;
 };
 
 // takes a date object and formats it using british convention (heroku doesn't take GB locals)
 const formatDate = function(date) {
-  return addZero(date.getDate()) +"/" + addZero(date.getMonth() + 1) + "/" + date.getFullYear();
+  return addZero(date.getDate()) + '/' + addZero(date.getMonth() + 1) + '/' + date.getFullYear();
 }
 
 
@@ -35,7 +35,7 @@ const blog = {
   blogRender: function(view, res) {
     models.getBlog(function(err, blogs){
 
-      let articles = "";
+      let articles = '';
 
       // In case of an error getting the blogs, render the view normally with no article
       // and log the error
@@ -46,16 +46,16 @@ const blog = {
       }
 
       // builds the articles array of html strings
-      articles = blogs.map(function(blog){
-        let datetime = blog.date.getFullYear() + "-" + addZero(blog.date.getMonth() + 1) + "-" + addZero(blog.date.getDate());
+      articles = blogs.map((blog) => {
+        let datetime = blog.date.getFullYear() + '-' + addZero(blog.date.getMonth() + 1) + '-' + addZero(blog.date.getDate());
 
         let article = '<article class="news-article article" role="region">';
         article += '<h3 class="section-subtitle">' + blog.title;
         article += '<time class="article-date" datetime="' + datetime + '">' + formatDate(blog.date) + '</time></h3>';
-        article +='<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>'
+        article += '<p>' + blog.text.replace(/\r?\n/g, '<br />') + '</p>';
 
         if (blog.image) {
-          article += '<img class="blog-image" alt="" src="' + blog.image + '">'
+          article += '<img class="blog-image" alt="" src="' + blog.image + '">';
         }
 
         article += '</article>';
@@ -64,7 +64,7 @@ const blog = {
 
       });
 
-      view.articles = articles.join("");
+      view.articles = articles.join('');
       res.render('layout', view);
       return;
     });
@@ -87,13 +87,13 @@ const blog = {
       let filename = req.file.filename;
       // cloudinary options: cloudinary folder and file format
       let options = {
-        folder: "goalball",
+        folder: 'goalball',
         width: 1000,
-        crop: "fit",
-        format: "jpg"
+        crop: 'fit',
+        format: 'jpg'
       };
 
-      cloudinary.v2.uploader.upload("./static/blog/" + filename, options, function(err, result) {
+      cloudinary.v2.uploader.upload('./static/blog/' + filename, options, function(err, result) {
         if (err){
           models.dbError(err, res, views.admin);
           return;

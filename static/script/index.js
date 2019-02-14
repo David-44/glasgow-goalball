@@ -17,15 +17,15 @@ const vSmallViewport = 500,
 
 // Sitewide Elements
 
-const navMenus  = document.getElementById("nav-menus"),
-	  hamburg   = document.getElementById("hamburger"),
-	  currentYear = document.getElementById("year"),
-	  iFrames   = document.getElementsByTagName("iframe"),
+const navMenus = document.getElementById('nav-menus'),
+	  hamburg = document.getElementById('hamburger'),
+	  currentYear = document.getElementById('year'),
+	  iFrames = document.getElementsByTagName('iframe'),
 
-		preview = document.getElementById("preview"),
-		title = document.getElementById("title"),
-		test = document.getElementById("text"),
-		blogPreview = document.getElementById("blog-preview");
+		preview = document.getElementById('preview'),
+		title = document.getElementById('title'),
+		test = document.getElementById('text'),
+		blogPreview = document.getElementById('blog-preview');
 
 
 
@@ -35,7 +35,7 @@ const navMenus  = document.getElementById("nav-menus"),
 
 
 const addZero = function(num){
-  if (num.toString.length == 1) {num = "0" + num;}
+  if (num.toString.length == 1) {num = '0' + num;}
   return num;
 };
 
@@ -51,24 +51,24 @@ function toArray(obj) {
 
 
 function toggleMenus(){
-	navMenus.classList.remove("is-hidden");
-	navMenus.classList.toggle("nav-menus__open");
+	navMenus.classList.remove('is-hidden');
+	navMenus.classList.toggle('nav-menus__open');
 }
 
 
 function hideMenusSmallScreen(){
 	if (window.innerWidth >= smallViewport) {
-		navMenus.classList.remove("is-hidden");
+		navMenus.classList.remove('is-hidden');
 	} else {
-		navMenus.classList.add("is-hidden");
+		navMenus.classList.add('is-hidden');
 	}
-	navMenus.classList.remove("nav-menus__open");
+	navMenus.classList.remove('nav-menus__open');
 }
 
 
 function resizeIframe(obj) {
 	// Safari seems to believe that the content window's width is always 0 for trnasforming lives and calendar...
-	obj.style.height = obj.contentWindow.innerWidth === 0 ? "300px" : obj.contentWindow.innerWidth * 0.5625 + "px";
+	obj.style.height = obj.contentWindow.innerWidth === 0 ? '300px' : obj.contentWindow.innerWidth * 0.5625 + 'px';
  }
 
 
@@ -78,7 +78,7 @@ function resizeIframe(obj) {
 function buildPost() {
 	let file = document.getElementById('image').files[0];
 	let now = new Date();
-	let datetime = now.getFullYear() + "-" + addZero(now.getMonth() + 1) + "-" + addZero(now.getDate());
+	let datetime = now.getFullYear() + '-' + addZero(now.getMonth() + 1) + '-' + addZero(now.getDate());
 
 	let article = '<article class="news-article article" role="region">';
 	article += '<h3 class="section-subtitle">' + title.value;
@@ -86,7 +86,7 @@ function buildPost() {
 	article +='<p>' + text.value.replace(/\r?\n/g, '<br />') + '</p></article>';
 
 	if(file) {
-		article += "<img class='blog-image' src= '" + URL.createObjectURL(file) + "'>"
+		article += "<img class='blog-image' src= '" + URL.createObjectURL(file) + "'>";
 	}
 
 	blogPreview.innerHTML = article;

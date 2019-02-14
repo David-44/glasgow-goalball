@@ -1,6 +1,6 @@
 'use strict';
 
-const bcrypt = require("bcrypt"),
+const bcrypt = require('bcrypt'),
 
     models = require('../models'),
     blog = require('./blog'),

@@ -70,7 +70,7 @@ const mail = {
 
     // test necessary because mail.app is initialised after mail.sendMail is parsed
     if (this.app){
-      let email, name, phone, condition, text;
+      let email, name, phone, condition, body;
 
       // Validation, to keep it extra simple we validate only the email
       if (validateEmail(req.body.email)) {
@@ -78,7 +78,7 @@ const mail = {
         name = req.body.name,
         phone = req.body.phone,
         condition = req.body.condition,
-        text = req.body.text;
+        body = req.body.text;
       } else {
         views.contact.emailValid = false;
         res.render('layout', views.contact);
@@ -87,13 +87,13 @@ const mail = {
 
       // sends email to recipient
       this.app.mailer.send('./email/recipient', {
+        phone,
+        condition,
+        body,
         to: recipient,
-        subject: "message from " + name,
+        subject: 'message from ' + name,
         replyTo: email,
-        phone: phone,
-        condition: condition,
-        sender: email,
-        body: text
+        sender: email
       }, function (err) {
         if (err) {
           emailError(err, res);
