@@ -17,27 +17,27 @@ const express = require('express'),
 
 // GET routes
 
-router.get(['/', '/index'], function (req, res) {
+router.get(['/', '/index'], (req, res) => {
   blog.blogRender(views.index, res);
 });
 
 
-router.get('/about', function (req, res) {
+router.get('/about', (req, res) => {
   res.render('layout', views.about);
 });
 
 
-router.get('/contact', function (req, res) {
+router.get('/contact', (req, res) => {
   res.render('layout', views.contact);
 });
 
 
-router.get('/sport', function (req, res) {
+router.get('/sport', (req, res) => {
   res.render('layout', views.sport);
 });
 
 // admin checks if user is logged in
-router.get('/admin', function (req, res) {
+router.get('/admin', (req, res) => {
   if ( req.session.username ) {
     blog.blogRender(views.admin, res);
   } else {
@@ -46,20 +46,20 @@ router.get('/admin', function (req, res) {
 });
 
 
-router.get('/logout', function (req, res) {
-  req.session.destroy(function () {
+router.get('/logout', (req, res) => {
+  req.session.destroy( () => {
     res.render('layout', views.login);
   });
 });
 
 
-router.get('/email', function (req, res) {
+router.get('/email', (req, res) => {
   res.redirect('/contact');
 });
 
 
 // default routes, redirects to home insead of sending a 404
-router.get('*', function (req, res) {
+router.get('*', (req, res) => {
   res.redirect('/');
 });
 

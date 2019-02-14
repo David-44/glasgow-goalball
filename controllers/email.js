@@ -94,7 +94,7 @@ const mail = {
         subject: 'message from ' + name,
         replyTo: email,
         sender: email
-      }, function (err) {
+      }, err => {
         if (err) {
           emailError(err, res);
           return;
@@ -105,7 +105,7 @@ const mail = {
       this.app.mailer.send('./email/member', {
         to: email,
         subject: 'Message from the Glasgow Goalball Team'
-      }, function (err) {
+      }, err => {
         if (err) {
           emailError(err, res);
           return;

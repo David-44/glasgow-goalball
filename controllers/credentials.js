@@ -31,7 +31,7 @@ const credentials = {
         password = req.body.password;
 
     // try to get the matching user if it exists
-    models.getUser(username, function (err, user) {
+    models.getUser(username, (err, user) => {
       if (err) {
         models.dbError(err, res, views.login);
         return;
@@ -44,7 +44,7 @@ const credentials = {
       }
 
       // if the user exists, compare the crypted passwords
-      bcrypt.compare(password, user.password, function (err, isMatch) {
+      bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) {
           models.dbError(err, res, views.login);
           return;

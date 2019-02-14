@@ -33,7 +33,7 @@ const blog = {
   // view is the view being rendered, property from the views object (required)
 
   blogRender: function (view, res) {
-    models.getBlog(function (err, blogs) {
+    models.getBlog((err, blogs) => {
 
       let articles = '';
 
@@ -93,7 +93,7 @@ const blog = {
         format: 'jpg'
       };
 
-      cloudinary.v2.uploader.upload('./static/blog/' + filename, options, function(err, result) {
+      cloudinary.v2.uploader.upload('./static/blog/' + filename, options, (err, result) => {
         if (err){
           models.dbError(err, res, views.admin);
           return;
@@ -102,7 +102,7 @@ const blog = {
         blogPost.image = result.url;
 
         // registers the blog into the database
-        blogPost.save(function (err) {
+        blogPost.save(err => {
           if (err) {
             models.dbError(err, res, views.admin);
           }
@@ -111,7 +111,7 @@ const blog = {
         });
       });
     } else {
-      blogPost.save(function (err) {
+      blogPost.save(err => {
         if (err) {
           models.dbError(err, res, views.admin);
         }
