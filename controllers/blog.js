@@ -9,13 +9,13 @@ const cloudinary = require('cloudinary'),
 /********************* Helper functions *******************/
 
 // takes an integer as parameter, adds a leading 0 if it contains only one digit
-const addZero = function(num){
-  if (num.toString().length == 1) {num = '0' + num;}
+const addZero = function (num) {
+  if (num.toString().length == 1) { num = '0' + num; }
   return num;
 };
 
 // takes a date object and formats it using british convention (heroku doesn't take GB locals)
-const formatDate = function(date) {
+const formatDate = function (date) {
   return addZero(date.getDate()) + '/' + addZero(date.getMonth() + 1) + '/' + date.getFullYear();
 }
 
@@ -32,8 +32,8 @@ const blog = {
   // the structure of blogposts is described in the models module (required)
   // view is the view being rendered, property from the views object (required)
 
-  blogRender: function(view, res) {
-    models.getBlog(function(err, blogs){
+  blogRender: function (view, res) {
+    models.getBlog(function (err, blogs) {
 
       let articles = '';
 
@@ -74,7 +74,7 @@ const blog = {
 
 
   // saves a blog to the Blog model. Requires coudinary to be set
-  postBlog: function(req, res) {
+  postBlog: function (req, res) {
     let now = new Date(),
     blogPost = new models.Blog({
       title: req.body.title,
@@ -102,7 +102,7 @@ const blog = {
         blogPost.image = result.url;
 
         // registers the blog into the database
-        blogPost.save(function(err){
+        blogPost.save(function (err) {
           if (err) {
             models.dbError(err, res, views.admin);
           }
@@ -111,7 +111,7 @@ const blog = {
         });
       });
     } else {
-      blogPost.save(function(err){
+      blogPost.save(function (err) {
         if (err) {
           models.dbError(err, res, views.admin);
         }

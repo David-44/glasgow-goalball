@@ -20,7 +20,7 @@ const wrongLogin = function (res) {
 const credentials = {
 
   // authenticates user, requires bcrypt and the session middleware to be setup
-  authenticate: function(req, res) {
+  authenticate: function (req, res) {
 
     // get credentials from the request body
     if (!req.body.username || !req.body.password) {
@@ -31,7 +31,7 @@ const credentials = {
         password = req.body.password;
 
     // try to get the matching user if it exists
-    models.getUser(username, function(err, user) {
+    models.getUser(username, function (err, user) {
       if (err) {
         models.dbError(err, res, views.login);
         return;
@@ -44,7 +44,7 @@ const credentials = {
       }
 
       // if the user exists, compare the crypted passwords
-      bcrypt.compare(password, user.password, function(err, isMatch) {
+      bcrypt.compare(password, user.password, function (err, isMatch) {
         if (err) {
           models.dbError(err, res, views.login);
           return;

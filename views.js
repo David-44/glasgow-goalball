@@ -66,7 +66,7 @@ const views = {
 
   // Initialisation of the app.locals file used by EJS templates
   // arguments are a handle to the express app and a handle to the ejs module
-  init: function(app, ejs) {
+  init: function (app, ejs) {
 
     app.locals = {
 
@@ -74,7 +74,7 @@ const views = {
       menus: [['Home', 'index'], ['About Us', 'about'], ['Goalball', 'sport'], ['Contact', 'contact']],
 
       // writes a small message if login check went wrong (used by login page)
-      checkCredentials: function(wrongCredentials) {
+      checkCredentials: function (wrongCredentials) {
         if (wrongCredentials) {
           return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
         }
@@ -82,7 +82,7 @@ const views = {
 
       // writes a small message if there was an error accessing the database
       // Used on credentials and blog controllers
-      dbError: function(dbErrorMessage) {
+      dbError: function (dbErrorMessage) {
         if (dbErrorMessage) {
           return ejs.render('<p class="bold-font">Error contacting the database, please contact the administrator</p>');
         }
@@ -90,7 +90,7 @@ const views = {
 
       // writes a small message regarding the status of message sent (message sent, error or invalid email)
       // Used on contact page
-      renderContact: function() {
+      renderContact: function () {
         if (views.contact.messageSent) {
           return ejs.render('<p class="bold-font">Thank you! Your message has been sent, we will come back to you shortly.</p>');
         } else if (views.contact.error) {

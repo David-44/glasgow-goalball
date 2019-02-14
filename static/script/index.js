@@ -34,13 +34,13 @@ const navMenus = document.getElementById('nav-menus'),
 // Helper functions
 
 
-const addZero = function(num){
+const addZero = function (num) {
   if (num.toString.length == 1) {num = '0' + num;}
   return num;
 };
 
 
-function toArray(obj) {
+function toArray (obj) {
   let array = [];
   // iterate backwards ensuring that length is an UInt32
   for (let i = obj.length >>> 0; i--;) {
@@ -97,7 +97,7 @@ function buildPost() {
 
 // Init
 
-const init = function() {
+const init = function () {
 
 	hideMenusSmallScreen();
 	currentYear.innerHTML = new Date().getFullYear().toString();
@@ -110,7 +110,7 @@ const init = function() {
 	}
 
 	// keep last because sometimes it blocks due to cross-origin error
-	toArray(iFrames).forEach(function(frame){
+	toArray(iFrames).forEach(function (frame) {
 		resizeIframe(frame);
 	});
 

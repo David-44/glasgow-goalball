@@ -83,7 +83,7 @@ const mongooseOptions = {
 };
 
 // establishes connection, takes URI directly from process.env
-mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function(err) {
+mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function (err) {
   if (err) {
     console.log('Unable to connect to the server. Please start the server. Error:', err);
   }
@@ -92,7 +92,7 @@ mongoose.connect(process.env.DB_CONNECT, mongooseOptions, function(err) {
 const db = mongoose.connection;
 
 // disconnects on error in order to force an auto reconnect
-db.on('error', function(error) {
+db.on('error', function (error) {
   console.error('Error in MongoDb connection: ' + error);
   mongoose.disconnect();
 });
