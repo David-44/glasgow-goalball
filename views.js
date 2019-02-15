@@ -76,7 +76,7 @@ const views = {
       // writes a small message if login check went wrong (used by login page)
       checkCredentials: function (wrongCredentials) {
         if (wrongCredentials) {
-          return ejs.render('<p class="bold-font">username and password do not match, please try again.</p>');
+          return ejs.render('<p class="bold-font" role="alert" aria-live="assertive">username and password do not match, please try again.</p>');
         }
       },
 
@@ -84,7 +84,7 @@ const views = {
       // Used on credentials and blog controllers
       dbError: function (dbErrorMessage) {
         if (dbErrorMessage) {
-          return ejs.render('<p class="bold-font">Error contacting the database, please contact the administrator</p>');
+          return ejs.render('<p class="bold-font" role="alert" aria-live="assertive">Error contacting the database, please contact the administrator</p>');
         }
       },
 
@@ -92,11 +92,11 @@ const views = {
       // Used on contact page
       renderContact: function () {
         if (views.contact.messageSent) {
-          return ejs.render('<p class="bold-font">Thank you! Your message has been sent, we will come back to you shortly.</p>');
+          return ejs.render('<p class="bold-font" role="alert" aria-live="assertive">Thank you! Your message has been sent, we will come back to you shortly.</p>');
         } else if (views.contact.error) {
-          return ejs.render('<p class="bold-font">There was an error sending the message, plase try again later or send us an email to <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a></p>');
+          return ejs.render('<p class="bold-font" role="alert" aria-live="assertive">There was an error sending the message, plase try again later or send us an email to <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a></p>');
         } else if (!views.contact.emailValid) {
-          return ejs.render('<p class="bold-font">The email address provided is not correct, please try again.</p>');
+          return ejs.render('<p class="bold-font" role="alert" aria-live="assertive">The email address provided is not correct, please try again.</p>');
         } else {
           return ejs.render('<p>If you want to be in touch, you can either send us an email at <a href="mailto://GlasgowGoalball@outlook.com">GlasgowGoalball@outlook.com</a> or fill the form below.</p>');
         }
