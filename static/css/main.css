@@ -536,7 +536,7 @@ h1, h2, h3, h4, h5, h6 {
     display: none; } }
 /* line 186, ../scss/project/_modules.scss */
 .nav-menus-item {
-  list-style:none;
+  list-style-image: url(../img/FFFFFF-0.png);
   white-space: nowrap;
   overflow-x: hidden;
   color: #e2d093;
