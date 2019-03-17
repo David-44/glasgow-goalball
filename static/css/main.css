@@ -538,6 +538,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menus-item {
   list-style:none;
   white-space: nowrap;
+  overflow-x: hidden;
   color: #e2d093;
   font-weight: 700;
   text-align: center;
