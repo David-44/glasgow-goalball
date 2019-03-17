@@ -489,7 +489,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Navigation menus */
 /* line 124, ../scss/project/_modules.scss */
 .nav-menus {
-  list-style: none !important;
+  list-style: none;
   animation-duration: .3s;
   animation-name: slideout;
   animation-fill-mode: forwards;
@@ -536,6 +536,8 @@ h1, h2, h3, h4, h5, h6 {
     display: none; } }
 /* line 186, ../scss/project/_modules.scss */
 .nav-menus-item {
+  list-style:none;
+  white-space: nowrap;
   color: #e2d093;
   font-weight: 700;
   text-align: center;
