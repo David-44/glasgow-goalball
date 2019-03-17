@@ -489,6 +489,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Navigation menus */
 /* line 124, ../scss/project/_modules.scss */
 .nav-menus {
+  list-style: none !important;
   animation-duration: .3s;
   animation-name: slideout;
   animation-fill-mode: forwards;

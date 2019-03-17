@@ -1,6 +1,6 @@
 # glasgow-goalball
 
-Source code of glasgow goalball.
+Source code of glasgow goalball, available at [glasgow-goalball.org.uk](http://glasgow-goalball.org.uk)
 Goalball is a sport for people with visual impairments, so more care has been taken for accessibility that for visual design.
 This is the reason why there are no animationss.
 
