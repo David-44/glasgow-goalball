@@ -16,7 +16,7 @@ const vSmallViewport = 500,
 
 
 // Finding Safari
-function IsSafari() {
+function isSafari() {
 	const ua = navigator.userAgent.toLowerCase();
 	if (ua.indexOf('safari') != -1) {
 	  if (ua.indexOf('chrome') > -1) {
@@ -126,7 +126,7 @@ const init = function () {
 	}
 
 	// keep last because sometimes it blocks due to cross-origin error
-	if IsSafari() {
+	if (isSafari()) {
 		toArray(iFrames).forEach(function (frame) {
 			resizeIframe(frame);
 		});
