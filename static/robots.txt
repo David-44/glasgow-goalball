@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: http://glasgow-goalball,org.uk/sitemap.xml
