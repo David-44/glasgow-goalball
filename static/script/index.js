@@ -15,6 +15,22 @@ const vSmallViewport = 500,
 
 
 
+// Finding Safari
+function IsSafari() {
+	const ua = navigator.userAgent.toLowerCase();
+	if (ua.indexOf('safari') != -1) {
+	  if (ua.indexOf('chrome') > -1) {
+	    return false;
+	  } else {
+	    return true; // Safari
+	  }
+	}
+	return false;
+}
+
+
+
+
 // Sitewide Elements
 
 const navMenus = document.getElementById('nav-menus'),
@@ -110,8 +126,10 @@ const init = function () {
 	}
 
 	// keep last because sometimes it blocks due to cross-origin error
-	toArray(iFrames).forEach(function (frame) {
-		resizeIframe(frame);
-	});
+	if IsSafari() {
+		toArray(iFrames).forEach(function (frame) {
+			resizeIframe(frame);
+		});
+	}
 
 }();
